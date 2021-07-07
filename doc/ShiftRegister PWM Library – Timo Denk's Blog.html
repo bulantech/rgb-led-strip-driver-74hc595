@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://timodenk.com/blog/shiftregister-pwm-library/ -->
+<html lang="en-US" class="has-cookie-bar cookie-bar-bottom-right-block cookie-bar-block"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="profile" href="http://gmpg.org/xfn/11">
+  <link rel="pingback" href="https://timodenk.com/blog/xmlrpc.php">
+
+  <title>ShiftRegister PWM Library – Timo Denk's Blog</title>
+
+<script async="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/analytics.js.ดาวน์โหลด"></script><script type="text/x-mathjax-config;executed=true">
+MathJax.Hub.Config({
+    jax: ["input/TeX","output/SVG"],
+    displayAlign: "center",
+    tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']]
+    }
+});</script>
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Timo Denk&#39;s Blog » Feed" href="https://timodenk.com/blog/feed/">
+<link rel="alternate" type="application/rss+xml" title="Timo Denk&#39;s Blog » Comments Feed" href="https://timodenk.com/blog/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Timo Denk&#39;s Blog » ShiftRegister PWM Library Comments Feed" href="https://timodenk.com/blog/shiftregister-pwm-library/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/timodenk.com\/blog\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.3.8"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/wp-emoji-release.min.js.ดาวน์โหลด" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="email-subscribers-css" href="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/email-subscribers-public.css" type="text/css" media="all">
+<link rel="stylesheet" id="cookie-consent-style-css" href="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="google-fonts-css" href="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="bootstrap-css" href="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/bootstrap.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="bootstrap-theme-css" href="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/bootstrap-theme.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="ie10-viewport-bug-workaround-css" href="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/ie10-viewport-bug-workaround.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="sin-style-css" href="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/style(1).css" type="text/css" media="all">
+<style id="sin-style-inline-css" type="text/css">
+
+blockquote{
+  border-left: 4px solid #0b24fb;
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  background: #0b24fb;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="range"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="week"]:focus,
+input[type="time"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="color"]:focus,
+textarea:focus {
+  border:1px solid #0b24fb;
+}
+a {
+  color: #0b24fb;
+}
+a:hover,
+a:focus,
+a:active {
+  color: #0b24fb;
+}
+.site-title a:hover,
+.site-title a:focus,
+.site-title a:active{
+  color:#0b24fb;
+}
+.main-navigation .menu >li >a:hover,
+.main-navigation .menu >li >a:focus{
+  color:#0b24fb;
+}
+.main-navigation .menu >li ul li a:hover,
+.main-navigation .menu >li ul li a:focus{
+  color:#0b24fb;
+}
+.responsive-nav >li a:hover,
+.responsive-nav >li a:focus{
+  color: #0b24fb;
+}
+.about-author-name a:hover{
+  color: #0b24fb;
+}
+.entry-title a:hover,
+.entry-title a:focus{
+  color:#0b24fb;
+}
+.sticky .post-content{
+  border-bottom:2px solid #0b24fb;
+}
+.sticky .entry-title,
+.sticky .entry-title a{
+  color:#0b24fb;
+}
+.entry-footer a:hover,
+.entry-footer a:focus{
+  color:#0b24fb;
+}
+.widget a:hover,
+.widget a:focus{
+  color:#0b24fb;
+}
+.widget_tag_cloud a:hover {
+  background-color: #0b24fb;
+}
+.comment-form .logged-in-as a:hover,
+.comment-form .logged-in-as a:focus{
+  color:#0b24fb;
+}
+.posts-navigation a:hover,
+.posts-navigation a:focus{
+  color:#0b24fb;
+}
+.post-navigation a:hover,
+.post-navigation a:focus{
+  color: #0b24fb;
+}
+.pagination .nav-links a:hover,
+.pagination .nav-links a:focus{
+  background:#0b24fb;
+}
+.pagination .nav-links .current{
+  background:#0b24fb;
+}
+.site-info a:hover,
+.site-info a:focus{
+  color:#0b24fb;
+}
+#back_top{
+  background:#0b24fb;
+}
+    
+</style>
+<script type="text/javascript" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/jquery.js.ดาวน์โหลด"></script>
+<script type="text/javascript" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/jquery-migrate.min.js.ดาวน์โหลด"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/timodenk.com\/blog\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/email-subscribers-public.js.ดาวน์โหลด"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://timodenk.com/blog/wp-content/themes/sin/assets/js/html5shiv.min.js?ver=3.7.3'></script>
+<![endif]-->
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://timodenk.com/blog/wp-content/themes/sin/assets/js/respond.min.js?ver=1.4.2'></script>
+<![endif]-->
+<link rel="https://api.w.org/" href="https://timodenk.com/blog/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://timodenk.com/blog/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://timodenk.com/blog/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="[Paper Recap] Multiple Hypotheses Prediction" href="https://timodenk.com/blog/multiple-hypotheses-prediction/">
+<link rel="next" title="TeX Math to Image Conversion" href="https://timodenk.com/blog/tex-math-to-image-conversion/">
+<meta name="generator" content="WordPress 5.3.8">
+<link rel="canonical" href="https://timodenk.com/blog/shiftregister-pwm-library/">
+<link rel="shortlink" href="https://timodenk.com/blog/?p=1272">
+<link rel="alternate" type="application/json+oembed" href="https://timodenk.com/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftimodenk.com%2Fblog%2Fshiftregister-pwm-library%2F">
+<style id="ctcc-css" type="text/css" media="screen">
+				#catapult-cookie-bar {
+					box-sizing: border-box;
+					max-height: 0;
+					opacity: 0;
+					z-index: 99999;
+					overflow: hidden;
+					color: #ddd;
+					position: fixed;
+					right: 20px;
+					bottom: 6%;
+					width: 300px;
+					background-color: #464646;
+				}
+				#catapult-cookie-bar a {
+					color: #fff;
+				}
+				#catapult-cookie-bar .x_close span {
+					background-color: ;
+				}
+				button#catapultCookie {
+					background:;
+					color: ;
+					border: 0; padding: 6px 9px; border-radius: 3px;
+				}
+				#catapult-cookie-bar h3 {
+					color: #ddd;
+				}
+				.has-cookie-bar #catapult-cookie-bar {
+					opacity: 1;
+					max-height: 999px;
+					min-height: 30px;
+				}</style><link rel="icon" href="https://timodenk.com/blog/wp-content/uploads/2016/08/cropped-blog-logo-squre-3-32x32.png" sizes="32x32">
+<link rel="icon" href="https://timodenk.com/blog/wp-content/uploads/2016/08/cropped-blog-logo-squre-3-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon-precomposed" href="https://timodenk.com/blog/wp-content/uploads/2016/08/cropped-blog-logo-squre-3-180x180.png">
+<meta name="msapplication-TileImage" content="https://timodenk.com/blog/wp-content/uploads/2016/08/cropped-blog-logo-squre-3-270x270.png">
+
+<!-- BEGIN ExactMetrics v5.3.7 Universal Analytics - https://exactmetrics.com/ -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37082212-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- END ExactMetrics Universal Analytics -->
+		<style type="text/css" id="wp-custom-css">
+			/* fix top margin of headings */
+h1, h2, h3, h4, h5, h6 {
+    margin: 1em 0;
+}
+
+/* hide empty top navigation */
+.top-bar {
+	display: none;
+}
+
+/* content links */
+.entry-content a, .textwidget a {
+	color: rgb(11, 36, 251);
+}
+
+/* layout breaking formulas scrollable */
+.entry-content {
+	overflow-x: auto;
+}
+
+/* hide wordpress ad */
+footer#colophon {
+	display: none;
+}
+
+/* figure caption styling */
+figure figcaption.wp-caption-text {
+	font-style: normal;
+}
+/* caption width 100 perc */
+figure {
+	width: 100% !important;
+}
+figure img {
+	margin: auto !important;
+}
+
+/* do not break lines in code */
+pre {
+	white-space: pre;
+	font-family: monospace;
+}
+
+/* align justify */
+.entry-content {
+	text-align: justify;
+}
+
+/* iframe styling */
+iframe {
+	border: none;
+}
+
+/* archive styling */
+ul.archive-list {
+	list-style-type: none;
+	padding-left: 0;
+}
+ul.archive-list em {
+	float: right;
+	color: #999;
+	font-size: 90%;
+}
+ul.archive-list li {
+	clear: both;
+	margin-bottom: 5px
+}
+ul.archive-list li a {
+	color: #269;
+	border-bottom: none;
+}
+
+table.align-right td, table.align-right th {
+	text-align: right;
+}
+
+/* blog post specific styling */
+/* voting systems */
+table.voting-matching-table td, table.voting-matching-table th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+table.voting-matching-table td.bg-vote-yes {
+	background-color: #9F9;
+}
+table.voting-matching-table td.bg-vote-no {
+	background-color: #F99;
+}		</style>
+		<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MathJax_SVG_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax_SVG .MJX-monospace {font-family: monospace}
+.MathJax_SVG .MJX-sans-serif {font-family: sans-serif}
+#MathJax_SVG_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax_SVG {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax_SVG * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.mjx-svg-href {fill: blue; stroke: blue}
+.MathJax_SVG_Processing {visibility: hidden; position: absolute; top: 0; left: 0; width: 0; height: 0; overflow: hidden; display: block!important}
+.MathJax_SVG_Processed {display: none!important}
+.MathJax_SVG_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none; padding: 0; border: 0; margin: 0}
+.MathJax_SVG_LineBox {display: table!important}
+.MathJax_SVG_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+.MathJax_SVG .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><script src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1f7e20d4b4bf734ccc.js.ดาวน์โหลด"></script><script type="text/javascript" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/int.js.ดาวน์โหลด"></script><script type="text/javascript" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/api"></script></head>
+
+<body class="post-template-default single single-post postid-1272 single-format-standard"><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_SVG_Hidden"></div><svg><defs id="MathJax_SVG_glyphs"><path stroke-width="1" id="MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"></path><path stroke-width="1" id="MJMAIN-63" d="M370 305T349 305T313 320T297 358Q297 381 312 396Q317 401 317 402T307 404Q281 408 258 408Q209 408 178 376Q131 329 131 219Q131 137 162 90Q203 29 272 29Q313 29 338 55T374 117Q376 125 379 127T395 129H409Q415 123 415 120Q415 116 411 104T395 71T366 33T318 2T249 -11Q163 -11 99 53T34 214Q34 318 99 383T250 448T370 421T404 357Q404 334 387 320Z"></path><path stroke-width="1" id="MJMAIN-61" d="M137 305T115 305T78 320T63 359Q63 394 97 421T218 448Q291 448 336 416T396 340Q401 326 401 309T402 194V124Q402 76 407 58T428 40Q443 40 448 56T453 109V145H493V106Q492 66 490 59Q481 29 455 12T400 -6T353 12T329 54V58L327 55Q325 52 322 49T314 40T302 29T287 17T269 6T247 -2T221 -8T190 -11Q130 -11 82 20T34 107Q34 128 41 147T68 188T116 225T194 253T304 268H318V290Q318 324 312 340Q290 411 215 411Q197 411 181 410T156 406T148 403Q170 388 170 359Q170 334 154 320ZM126 106Q126 75 150 51T209 26Q247 26 276 49T315 109Q317 116 318 175Q318 233 317 233Q309 233 296 232T251 223T193 203T147 166T126 106Z"></path><path stroke-width="1" id="MJMAIN-72" d="M36 46H50Q89 46 97 60V68Q97 77 97 91T98 122T98 161T98 203Q98 234 98 269T98 328L97 351Q94 370 83 376T38 385H20V408Q20 431 22 431L32 432Q42 433 60 434T96 436Q112 437 131 438T160 441T171 442H174V373Q213 441 271 441H277Q322 441 343 419T364 373Q364 352 351 337T313 322Q288 322 276 338T263 372Q263 381 265 388T270 400T273 405Q271 407 250 401Q234 393 226 386Q179 341 179 207V154Q179 141 179 127T179 101T180 81T180 66V61Q181 59 183 57T188 54T193 51T200 49T207 48T216 47T225 47T235 46T245 46H276V0H267Q249 3 140 3Q37 3 28 0H20V46H36Z"></path><path stroke-width="1" id="MJMAIN-69" d="M69 609Q69 637 87 653T131 669Q154 667 171 652T188 609Q188 579 171 564T129 549Q104 549 87 564T69 609ZM247 0Q232 3 143 3Q132 3 106 3T56 1L34 0H26V46H42Q70 46 91 49Q100 53 102 60T104 102V205V293Q104 345 102 359T88 378Q74 385 41 385H30V408Q30 431 32 431L42 432Q52 433 70 434T106 436Q123 437 142 438T171 441T182 442H185V62Q190 52 197 50T232 46H255V0H247Z"></path><path stroke-width="1" id="MJMAIN-65" d="M28 218Q28 273 48 318T98 391T163 433T229 448Q282 448 320 430T378 380T406 316T415 245Q415 238 408 231H126V216Q126 68 226 36Q246 30 270 30Q312 30 342 62Q359 79 369 104L379 128Q382 131 395 131H398Q415 131 415 121Q415 117 412 108Q393 53 349 21T250 -11Q155 -11 92 58T28 218ZM333 275Q322 403 238 411H236Q228 411 220 410T195 402T166 381T143 340T127 274V267H333V275Z"></path><path stroke-width="1" id="MJMAIN-34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z"></path><path stroke-width="1" id="MJMAIN-39" d="M352 287Q304 211 232 211Q154 211 104 270T44 396Q42 412 42 436V444Q42 537 111 606Q171 666 243 666Q245 666 249 666T257 665H261Q273 665 286 663T323 651T370 619T413 560Q456 472 456 334Q456 194 396 97Q361 41 312 10T208 -22Q147 -22 108 7T68 93T121 149Q143 149 158 135T173 96Q173 78 164 65T148 49T135 44L131 43Q131 41 138 37T164 27T206 22H212Q272 22 313 86Q352 142 352 280V287ZM244 248Q292 248 321 297T351 430Q351 508 343 542Q341 552 337 562T323 588T293 615T246 625Q208 625 181 598Q160 576 154 546T147 441Q147 358 152 329T172 282Q197 248 244 248Z"></path><path stroke-width="1" id="MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path><path stroke-width="1" id="MJMAIN-38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z"></path><path stroke-width="1" id="MJMAIN-6C" d="M42 46H56Q95 46 103 60V68Q103 77 103 91T103 124T104 167T104 217T104 272T104 329Q104 366 104 407T104 482T104 542T103 586T103 603Q100 622 89 628T44 637H26V660Q26 683 28 683L38 684Q48 685 67 686T104 688Q121 689 141 690T171 693T182 694H185V379Q185 62 186 60Q190 52 198 49Q219 46 247 46H263V0H255L232 1Q209 2 183 2T145 3T107 3T57 1L34 0H26V46H42Z"></path><path stroke-width="1" id="MJMAIN-6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z"></path><path stroke-width="1" id="MJMAIN-6B" d="M36 46H50Q89 46 97 60V68Q97 77 97 91T97 124T98 167T98 217T98 272T98 329Q98 366 98 407T98 482T98 542T97 586T97 603Q94 622 83 628T38 637H20V660Q20 683 22 683L32 684Q42 685 61 686T98 688Q115 689 135 690T165 693T176 694H179V463L180 233L240 287Q300 341 304 347Q310 356 310 364Q310 383 289 385H284V431H293Q308 428 412 428Q475 428 484 431H489V385H476Q407 380 360 341Q286 278 286 274Q286 273 349 181T420 79Q434 60 451 53T500 46H511V0H505Q496 3 418 3Q322 3 307 0H299V46H306Q330 48 330 65Q330 72 326 79Q323 84 276 153T228 222L176 176V120V84Q176 65 178 59T189 49Q210 46 238 46H254V0H246Q231 3 137 3T28 0H20V46H36Z"></path><path stroke-width="1" id="MJMAIN-2248" d="M55 319Q55 360 72 393T114 444T163 472T205 482Q207 482 213 482T223 483Q262 483 296 468T393 413L443 381Q502 346 553 346Q609 346 649 375T694 454Q694 465 698 474T708 483Q722 483 722 452Q722 386 675 338T555 289Q514 289 468 310T388 357T308 404T224 426Q164 426 125 393T83 318Q81 289 69 289Q55 289 55 319ZM55 85Q55 126 72 159T114 210T163 238T205 248Q207 248 213 248T223 249Q262 249 296 234T393 179L443 147Q502 112 553 112Q609 112 649 141T694 220Q694 249 708 249T722 217Q722 153 675 104T555 55Q514 55 468 76T388 123T308 170T224 192Q164 192 125 159T83 84Q80 55 69 55Q55 55 55 85Z"></path><path stroke-width="1" id="MJMAIN-36" d="M42 313Q42 476 123 571T303 666Q372 666 402 630T432 550Q432 525 418 510T379 495Q356 495 341 509T326 548Q326 592 373 601Q351 623 311 626Q240 626 194 566Q147 500 147 364L148 360Q153 366 156 373Q197 433 263 433H267Q313 433 348 414Q372 400 396 374T435 317Q456 268 456 210V192Q456 169 451 149Q440 90 387 34T253 -22Q225 -22 199 -14T143 16T92 75T56 172T42 313ZM257 397Q227 397 205 380T171 335T154 278T148 216Q148 133 160 97T198 39Q222 21 251 21Q302 21 329 59Q342 77 347 104T352 209Q352 289 347 316T329 361Q302 397 257 397Z"></path><path stroke-width="1" id="MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path><path stroke-width="1" id="MJMAIN-48" d="M128 622Q121 629 117 631T101 634T58 637H25V683H36Q57 680 180 680Q315 680 324 683H335V637H302Q262 636 251 634T233 622L232 500V378H517V622Q510 629 506 631T490 634T447 637H414V683H425Q446 680 569 680Q704 680 713 683H724V637H691Q651 636 640 634T622 622V61Q628 51 639 49T691 46H724V0H713Q692 3 569 3Q434 3 425 0H414V46H447Q489 47 498 49T517 61V332H232V197L233 61Q239 51 250 49T302 46H335V0H324Q303 3 180 3Q45 3 36 0H25V46H58Q100 47 109 49T128 61V622Z"></path><path stroke-width="1" id="MJMAIN-7A" d="M42 263Q44 270 48 345T53 423V431H393Q399 425 399 415Q399 403 398 402L381 378Q364 355 331 309T265 220L134 41L182 40H206Q254 40 283 46T331 77Q352 105 359 185L361 201Q361 202 381 202H401V196Q401 195 393 103T384 6V0H209L34 1L31 3Q28 8 28 17Q28 30 29 31T160 210T294 394H236Q169 393 152 388Q127 382 113 367Q89 344 82 264V255H42V263Z"></path><path stroke-width="1" id="MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path stroke-width="1" id="MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path stroke-width="1" id="MJMAIN-35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"></path><path stroke-width="1" id="MJMAIN-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path><path stroke-width="1" id="MJMAIN-37" d="M55 458Q56 460 72 567L88 674Q88 676 108 676H128V672Q128 662 143 655T195 646T364 644H485V605L417 512Q408 500 387 472T360 435T339 403T319 367T305 330T292 284T284 230T278 162T275 80Q275 66 275 52T274 28V19Q270 2 255 -10T221 -22Q210 -22 200 -19T179 0T168 40Q168 198 265 368Q285 400 349 489L395 552H302Q128 552 119 546Q113 543 108 522T98 479L95 458V455H55V458Z"></path><path stroke-width="1" id="MJMATHI-72" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path><path stroke-width="1" id="MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path stroke-width="1" id="MJMAIN-2208" d="M84 250Q84 372 166 450T360 539Q361 539 377 539T419 540T469 540H568Q583 532 583 520Q583 511 570 501L466 500Q355 499 329 494Q280 482 242 458T183 409T147 354T129 306T124 272V270H568Q583 262 583 250T568 230H124V228Q124 207 134 177T167 112T231 48T328 7Q355 1 466 0H570Q583 -10 583 -20Q583 -32 568 -40H471Q464 -40 446 -40T417 -41Q262 -41 172 45Q84 127 84 250Z"></path><path stroke-width="1" id="MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path stroke-width="1" id="MJMAIN-5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path><path stroke-width="1" id="MJMAIN-41" d="M255 0Q240 3 140 3Q48 3 39 0H32V46H47Q119 49 139 88Q140 91 192 245T295 553T348 708Q351 716 366 716H376Q396 715 400 709Q402 707 508 390L617 67Q624 54 636 51T687 46H717V0H708Q699 3 581 3Q458 3 437 0H427V46H440Q510 46 510 64Q510 66 486 138L462 209H229L209 150Q189 91 189 85Q189 72 209 59T259 46H264V0H255ZM447 255L345 557L244 256Q244 255 345 255H447Z"></path><path stroke-width="1" id="MJMAIN-64" d="M376 495Q376 511 376 535T377 568Q377 613 367 624T316 637H298V660Q298 683 300 683L310 684Q320 685 339 686T376 688Q393 689 413 690T443 693T454 694H457V390Q457 84 458 81Q461 61 472 55T517 46H535V0Q533 0 459 -5T380 -11H373V44L365 37Q307 -11 235 -11Q158 -11 96 50T34 215Q34 315 97 378T244 442Q319 442 376 393V495ZM373 342Q328 405 260 405Q211 405 173 369Q146 341 139 305T131 211Q131 155 138 120T173 59Q203 26 251 26Q322 26 373 103V342Z"></path><path stroke-width="1" id="MJMAIN-75" d="M383 58Q327 -10 256 -10H249Q124 -10 105 89Q104 96 103 226Q102 335 102 348T96 369Q86 385 36 385H25V408Q25 431 27 431L38 432Q48 433 67 434T105 436Q122 437 142 438T172 441T184 442H187V261Q188 77 190 64Q193 49 204 40Q224 26 264 26Q290 26 311 35T343 58T363 90T375 120T379 144Q379 145 379 161T380 201T380 248V315Q380 361 370 372T320 385H302V431Q304 431 378 436T457 442H464V264Q464 84 465 81Q468 61 479 55T524 46H542V0Q540 0 467 -5T390 -11H383V58Z"></path><path stroke-width="1" id="MJMAIN-6E" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q450 438 463 329Q464 322 464 190V104Q464 66 466 59T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z"></path><path stroke-width="1" id="MJMAIN-221A" d="M95 178Q89 178 81 186T72 200T103 230T169 280T207 309Q209 311 212 311H213Q219 311 227 294T281 177Q300 134 312 108L397 -77Q398 -77 501 136T707 565T814 786Q820 800 834 800Q841 800 846 794T853 782V776L620 293L385 -193Q381 -200 366 -200Q357 -200 354 -197Q352 -195 256 15L160 225L144 214Q129 202 113 190T95 178Z"></path><path stroke-width="1" id="MJMATHI-3C0" d="M132 -11Q98 -11 98 22V33L111 61Q186 219 220 334L228 358H196Q158 358 142 355T103 336Q92 329 81 318T62 297T53 285Q51 284 38 284Q19 284 19 294Q19 300 38 329T93 391T164 429Q171 431 389 431Q549 431 553 430Q573 423 573 402Q573 371 541 360Q535 358 472 358H408L405 341Q393 269 393 222Q393 170 402 129T421 65T431 37Q431 20 417 5T381 -10Q370 -10 363 -7T347 17T331 77Q330 86 330 121Q330 170 339 226T357 318T367 358H269L268 354Q268 351 249 275T206 114T175 17Q164 -11 132 -11Z"></path><path stroke-width="1" id="MJMAIN-D7" d="M630 29Q630 9 609 9Q604 9 587 25T493 118L389 222L284 117Q178 13 175 11Q171 9 168 9Q160 9 154 15T147 29Q147 36 161 51T255 146L359 250L255 354Q174 435 161 449T147 471Q147 480 153 485T168 490Q173 490 175 489Q178 487 284 383L389 278L493 382Q570 459 587 475T609 491Q630 491 630 471Q630 464 620 453T522 355L418 250L522 145Q606 61 618 48T630 29Z"></path><path stroke-width="1" id="MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path><path stroke-width="1" id="MJMAIN-67" d="M329 409Q373 453 429 453Q459 453 472 434T485 396Q485 382 476 371T449 360Q416 360 412 390Q410 404 415 411Q415 412 416 414V415Q388 412 363 393Q355 388 355 386Q355 385 359 381T368 369T379 351T388 325T392 292Q392 230 343 187T222 143Q172 143 123 171Q112 153 112 133Q112 98 138 81Q147 75 155 75T227 73Q311 72 335 67Q396 58 431 26Q470 -13 470 -72Q470 -139 392 -175Q332 -206 250 -206Q167 -206 107 -175Q29 -140 29 -75Q29 -39 50 -15T92 18L103 24Q67 55 67 108Q67 155 96 193Q52 237 52 292Q52 355 102 398T223 442Q274 442 318 416L329 409ZM299 343Q294 371 273 387T221 404Q192 404 171 388T145 343Q142 326 142 292Q142 248 149 227T179 192Q196 182 222 182Q244 182 260 189T283 207T294 227T299 242Q302 258 302 292T299 343ZM403 -75Q403 -50 389 -34T348 -11T299 -2T245 0H218Q151 0 138 -6Q118 -15 107 -34T95 -74Q95 -84 101 -97T122 -127T170 -155T250 -167Q319 -167 361 -139T403 -75Z"></path></defs></svg></div><div id="MathJax_Message" style="display: none;"></div>
+
+<div id="page" class="site">
+
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-area">
+        <button class="menu-toggle navbar-toggle" data-toggle="collapse" data-target="#main-navigation-collapse"><i class="fa fa-bars"></i></button>
+        
+        <div id="site-navigation" class="main-navigation">
+                  </div>
+      </div>
+
+      <div id="main-navigation-collapse" class="collapse navbar-collapse">
+              </div>
+    </div>
+  </div>
+
+  <header id="masthead" class="site-header">
+    <div class="container">
+      <div class="site-branding">
+        <div class="site-branding-logo ">
+          
+                      <h1 class="site-title"><a href="https://timodenk.com/blog/" rel="home">Timo Denk's Blog</a></h1>
+          
+          <p class="site-description">
+                      Science, Programming, 3D-Printing, Music, Philosophy, and More…                    </p>
+        </div>
+      </div><!-- .site-branding -->
+    </div>
+  </header><!-- #masthead -->
+
+<div id="content" class="site-content">
+  <div class="container">
+
+      <div class="row">
+        <div class="col-md-8 sidebar-right">
+
+          <div id="primary" class="content-area">
+            <main id="main" class="site-main">
+
+            
+            <article id="post-1272" class="post-1272 post type-post status-publish format-standard has-post-thumbnail hentry category-arduino category-hardware tag-74hc595 tag-arduino tag-atmega328 tag-cpp tag-interrupt tag-library tag-low-level tag-microcontroller tag-output tag-programming tag-pwm tag-shift-register tag-timer">
+               
+                <div class="post-media">
+                  <img width="825" height="440" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/sr-pwm-header-825x440.jpg" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" srcset="https://timodenk.com/blog/wp-content/uploads/2017/10/sr-pwm-header.jpg 825w, https://timodenk.com/blog/wp-content/uploads/2017/10/sr-pwm-header-300x160.jpg 300w, https://timodenk.com/blog/wp-content/uploads/2017/10/sr-pwm-header-768x410.jpg 768w" sizes="(max-width: 825px) 100vw, 825px">                </div>
+              
+              <div class="post-content clearfix">
+                <header class="entry-header clearfix"><h1 class="entry-title">ShiftRegister PWM Library</h1></header><!-- .entry-header -->
+              <div class="entry-content clearfix">
+                <p>The ShiftRegister PWM Library enables usage of shift register pins as pulse-width modulated (PWM) pins. Instead of setting them to either high or low, the library lets the user set them to up to 256 PWM-levels. This post serves as a documentation page for the library and is to be extended over time.<span id="more-1272"></span></p>
+<p style="text-align: center;"><a href="https://github.com/Simsso/ShiftRegister-PWM-Library"><button>Source Code</button></a>&nbsp;<a href="https://github.com/Simsso/ShiftRegister-PWM-Library/archive/master.zip"><button>Download</button></a></p>
+<p>The following video (<a href="https://timodenk.com/talks/sr-pwm-library/">slides</a>) gives an overview about the library. The source code can be found on GitHub:&nbsp;<a href="https://github.com/Simsso/ShiftRegister-PWM-Library" target="_blank" rel="noopener">/Simsso/ShiftRegister-PWM-Library</a>&nbsp;(<a href="https://github.com/Simsso/ShiftRegister-PWM-Library/archive/master.zip" target="_blank" rel="noopener">ZIP-download</a>)</p>
+<p><iframe src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/ncQIu7FrIyA.html" width="840" height="370" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>
+<h2>Getting Started</h2>
+<p>In order to get started, you need an Arduino UNO, a 74HC595 shift register (<a href="https://shiftregister.simsso.de/data-sheet.pdf" rel="noopener">NXP data sheet</a>), and some LEDs. The figure below shows the wiring (click to enlarge). The LEDs may be connected to the eight shift register output pins (Q0 to Q7). Note that the shift register’s control wires (data, shift clock, and latch clock) are connected to the Arduino pins 2, 3, and 4. These pins can not be changed easily, because the library internally uses&nbsp;<a href="https://timodenk.com/blog/port-manipulation-and-arduino-digitalwrite-performance/" rel="noopener">port manipulation to maximize performance</a>. The <em>Custom Wiring</em> section of this post explains how these pins can be altered.</p>
+<p><a href="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/single-sr_schem_screenshot.png"><img class="aligncenter wp-image-1835" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/single-sr_schem_screenshot.png" alt="" width="483" height="315" srcset="https://timodenk.com/blog/wp-content/uploads/2017/10/single-sr_schem_screenshot.png 966w, https://timodenk.com/blog/wp-content/uploads/2017/10/single-sr_schem_screenshot-300x195.png 300w, https://timodenk.com/blog/wp-content/uploads/2017/10/single-sr_schem_screenshot-768x500.png 768w, https://timodenk.com/blog/wp-content/uploads/2017/10/single-sr_schem_screenshot-783x510.png 783w" sizes="(max-width: 483px) 100vw, 483px"></a></p>
+<p>After setting up the hardware,&nbsp;<a href="https://github.com/Simsso/ShiftRegister-PWM-Library/archive/master.zip" rel="noopener">download</a>&nbsp;and&nbsp;<a href="https://www.arduino.cc/en/pmwiki.php?n=Guide/Libraries" rel="noopener">install</a>&nbsp;the library on your machine. Now you can run the example sketch <em>Sine</em>&nbsp;by uploading the following code. The sketch makes the LEDs of the shift register pulse like a sine wave (as shown in the introduction video).</p>
+<pre>#include "ShiftRegisterPWM.h"
+
+ShiftRegisterPWM sr(1, 16);
+
+void setup()
+{
+  pinMode(2, OUTPUT); // sr data pin
+  pinMode(3, OUTPUT); // sr clock pin
+  pinMode(4, OUTPUT); // sr latch pin
+  
+  // use timer1 for frequent update
+  sr.interrupt(ShiftRegisterPWM::UpdateFrequency::SuperFast);
+}
+
+void loop()
+{
+  for (uint8_t i = 0; i &lt; 8; i++) {
+    uint8_t val = (uint8_t)(((float)
+      sin(millis() / 150.0 + i / 8.0 * 2.0 * PI) + 1) * 128);
+    sr.set(i, val);
+  }
+}</pre>
+<p>The key things to note from the sketch above are:</p>
+<ul>
+<li><strong>Create a shift register object</strong>. An explanation for the <code>resolution</code> parameter can be found in the next section. It is important to keep the resolution as low as possible because the memory consumption grows linearly with it.<br>
+<code>ShiftRegisterPWM sr(numShiftRegisters, resolution);</code></li>
+<li><strong>Enable timer interrupts</strong>, i.e. automatically update the shift register output pins using timer 1 of the ATmega328P. The parameter defines the clock frequency (see next section for a table of possible values).<br>
+<code>sr.interrupt(ShiftRegisterPWM::UpdateFrequency::SuperFast);</code></li>
+<li><strong>Set the i-th pin</strong> of the shift register to a PWM value between 0 (always off) and 255 (always on). If the output resolution is set to a lower value, e.g. 8, the PWM value will be scaled down accordingly.<br>
+<code>sr.set(i, val);</code></li>
+</ul>
+<h2>Terminology</h2>
+<p><strong>Pulse-width modulation (PWM)</strong> is a technique for encoding information in a digital signal through pulsing. See&nbsp;<a href="https://en.wikipedia.org/wiki/Pulse-width_modulation" rel="noopener">Wikipedia</a>&nbsp;for details. The Arduino Uno has six pins that support PWM output (namely 3, 5, 6, 9, 10, and 11) which can be accessed using the function&nbsp;<a href="https://www.arduino.cc/en/Reference/AnalogWrite" rel="noopener">analogWrite</a>. In some cases, however, more PWM pins might be required. This library makes the pins of a shift register PWM capable.</p>
+<p>A&nbsp;<strong>shift register</strong> in our use-case is a storage that can be serially fed with digital values. In case of the 74HC595 shift register, it outputs the last eight bits of data in parallel.</p>
+<p>The PWM<strong>&nbsp;carrier frequency</strong>, denoted as <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-1-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;msub&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mtext&gt;carrier&lt;/mtext&gt;&lt;/msub&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="6.045ex" height="2.543ex" viewBox="0 -805.7 2602.6 1094.7" role="img" focusable="false" style="vertical-align: -0.671ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-66" x="0" y="0"></use><g transform="translate(490,-150)"><use transform="scale(0.707)" href="#MJMAIN-63"></use><use transform="scale(0.707)" href="#MJMAIN-61" x="444" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-72" x="945" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-72" x="1337" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-69" x="1730" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-65" x="2008" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-72" x="2453" y="0"></use></g></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>f</mi><mtext>carrier</mtext></msub></math></span></span><script type="math/tex" id="MathJax-Element-1">f_\text{carrier}</script>, is the frequency that at which PWM pulses are emitted. Its inverse value is the period. The Arduino’s carrier frequency is <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-2-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mn&gt;490&lt;/mn&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.487ex" height="2.009ex" viewBox="0 -748.3 1501.5 865.1" role="img" focusable="false" style="vertical-align: -0.271ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-34"></use><use href="#MJMAIN-39" x="500" y="0"></use><use href="#MJMAIN-30" x="1001" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>490</mn></math></span></span><script type="math/tex" id="MathJax-Element-2">490</script> or <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-3-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mn&gt;980&lt;/mn&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.487ex" height="2.009ex" viewBox="0 -748.3 1501.5 865.1" role="img" focusable="false" style="vertical-align: -0.271ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-39"></use><use href="#MJMAIN-38" x="500" y="0"></use><use href="#MJMAIN-30" x="1001" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>980</mn></math></span></span><script type="math/tex" id="MathJax-Element-3">980</script> Hz by default (<a href="https://www.arduino.cc/en/Reference/AnalogWrite">reference</a>).</p>
+<p>The&nbsp;PWM<strong> clock frequency</strong>, denoted as <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-4-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;msub&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mtext&gt;clock&lt;/mtext&gt;&lt;/msub&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.979ex" height="2.543ex" viewBox="0 -805.7 2143.7 1094.7" role="img" focusable="false" style="vertical-align: -0.671ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-66" x="0" y="0"></use><g transform="translate(490,-150)"><use transform="scale(0.707)" href="#MJMAIN-63"></use><use transform="scale(0.707)" href="#MJMAIN-6C" x="444" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-6F" x="723" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-63" x="1223" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-6B" x="1668" y="0"></use></g></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>f</mi><mtext>clock</mtext></msub></math></span></span><script type="math/tex" id="MathJax-Element-4">f_\text{clock}</script>, is the maximum frequency at which outputs can be changed. Some possible values are predefined and listed in the table below. They can be passed to the <code>interrupt</code> function. For example like that:<br>
+<code>sr.interrupt(ShiftRegisterPWM::UpdateFrequency::SuperFast);</code></p>
+<table>
+<tbody>
+<tr>
+<th>Name</th>
+<th>Clock frequency <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-5-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;msub&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mtext&gt;clock&lt;/mtext&gt;&lt;/msub&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.979ex" height="2.498ex" viewBox="0 -791.7 2143.7 1075.7" role="img" focusable="false" style="vertical-align: -0.66ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-66" x="0" y="0"></use><g transform="translate(490,-150)"><use transform="scale(0.707)" href="#MJMAIN-63"></use><use transform="scale(0.707)" href="#MJMAIN-6C" x="444" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-6F" x="723" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-63" x="1223" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-6B" x="1668" y="0"></use></g></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>f</mi><mtext>clock</mtext></msub></math></span></span><script type="math/tex" id="MathJax-Element-5">f_\text{clock}</script></th>
+</tr>
+<tr>
+<td><code>VerySlow</code></td>
+<td><span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-6-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mo&gt;&amp;#x2248;&lt;/mo&gt;&lt;mn&gt;6&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;400&lt;/mn&gt;&lt;mtext&gt;&amp;#xA0;Hz&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="11.493ex" height="2.409ex" viewBox="0 -748.3 4948.4 1037.3" role="img" focusable="false" style="vertical-align: -0.671ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-2248" x="0" y="0"></use><use href="#MJMAIN-36" x="1056" y="0"></use><use href="#MJMAIN-2C" x="1556" y="0"></use><g transform="translate(2001,0)"><use href="#MJMAIN-34"></use><use href="#MJMAIN-30" x="500" y="0"></use><use href="#MJMAIN-30" x="1001" y="0"></use></g><g transform="translate(3503,0)"><use href="#MJMAIN-48" x="250" y="0"></use><use href="#MJMAIN-7A" x="1000" y="0"></use></g></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>≈</mo><mn>6</mn><mo>,</mo><mn>400</mn><mtext>&nbsp;Hz</mtext></math></span></span><script type="math/tex" id="MathJax-Element-6">\approx6,400\text{ Hz}</script></td>
+</tr>
+<tr>
+<td><code>Slow</code></td>
+<td><span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-7-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mo&gt;&amp;#x2248;&lt;/mo&gt;&lt;mn&gt;12&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;800&lt;/mn&gt;&lt;mtext&gt;&amp;#xA0;Hz&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="12.656ex" height="2.409ex" viewBox="0 -748.3 5448.9 1037.3" role="img" focusable="false" style="vertical-align: -0.671ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-2248" x="0" y="0"></use><g transform="translate(1056,0)"><use href="#MJMAIN-31"></use><use href="#MJMAIN-32" x="500" y="0"></use></g><use href="#MJMAIN-2C" x="2057" y="0"></use><g transform="translate(2502,0)"><use href="#MJMAIN-38"></use><use href="#MJMAIN-30" x="500" y="0"></use><use href="#MJMAIN-30" x="1001" y="0"></use></g><g transform="translate(4003,0)"><use href="#MJMAIN-48" x="250" y="0"></use><use href="#MJMAIN-7A" x="1000" y="0"></use></g></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>≈</mo><mn>12</mn><mo>,</mo><mn>800</mn><mtext>&nbsp;Hz</mtext></math></span></span><script type="math/tex" id="MathJax-Element-7">\approx12,800\text{ Hz}</script></td>
+</tr>
+<tr>
+<td><code>Medium</code></td>
+<td><span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-8-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mo&gt;&amp;#x2248;&lt;/mo&gt;&lt;mn&gt;25&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;600&lt;/mn&gt;&lt;mtext&gt;&amp;#xA0;Hz&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="12.656ex" height="2.409ex" viewBox="0 -748.3 5448.9 1037.3" role="img" focusable="false" style="vertical-align: -0.671ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-2248" x="0" y="0"></use><g transform="translate(1056,0)"><use href="#MJMAIN-32"></use><use href="#MJMAIN-35" x="500" y="0"></use></g><use href="#MJMAIN-2C" x="2057" y="0"></use><g transform="translate(2502,0)"><use href="#MJMAIN-36"></use><use href="#MJMAIN-30" x="500" y="0"></use><use href="#MJMAIN-30" x="1001" y="0"></use></g><g transform="translate(4003,0)"><use href="#MJMAIN-48" x="250" y="0"></use><use href="#MJMAIN-7A" x="1000" y="0"></use></g></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>≈</mo><mn>25</mn><mo>,</mo><mn>600</mn><mtext>&nbsp;Hz</mtext></math></span></span><script type="math/tex" id="MathJax-Element-8">\approx25,600\text{ Hz}</script></td>
+</tr>
+<tr>
+<td><code>Fast</code></td>
+<td><span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-9-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mo&gt;&amp;#x2248;&lt;/mo&gt;&lt;mn&gt;35&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;714&lt;/mn&gt;&lt;mtext&gt;&amp;#xA0;Hz&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="12.656ex" height="2.409ex" viewBox="0 -748.3 5448.9 1037.3" role="img" focusable="false" style="vertical-align: -0.671ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-2248" x="0" y="0"></use><g transform="translate(1056,0)"><use href="#MJMAIN-33"></use><use href="#MJMAIN-35" x="500" y="0"></use></g><use href="#MJMAIN-2C" x="2057" y="0"></use><g transform="translate(2502,0)"><use href="#MJMAIN-37"></use><use href="#MJMAIN-31" x="500" y="0"></use><use href="#MJMAIN-34" x="1001" y="0"></use></g><g transform="translate(4003,0)"><use href="#MJMAIN-48" x="250" y="0"></use><use href="#MJMAIN-7A" x="1000" y="0"></use></g></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>≈</mo><mn>35</mn><mo>,</mo><mn>714</mn><mtext>&nbsp;Hz</mtext></math></span></span><script type="math/tex" id="MathJax-Element-9">\approx35,714\text{ Hz}</script></td>
+</tr>
+<tr>
+<td><code>SuperFast</code></td>
+<td><span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-10-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mo&gt;&amp;#x2248;&lt;/mo&gt;&lt;mn&gt;51&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;281&lt;/mn&gt;&lt;mtext&gt;&amp;#xA0;Hz&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="12.656ex" height="2.409ex" viewBox="0 -748.3 5448.9 1037.3" role="img" focusable="false" style="vertical-align: -0.671ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-2248" x="0" y="0"></use><g transform="translate(1056,0)"><use href="#MJMAIN-35"></use><use href="#MJMAIN-31" x="500" y="0"></use></g><use href="#MJMAIN-2C" x="2057" y="0"></use><g transform="translate(2502,0)"><use href="#MJMAIN-32"></use><use href="#MJMAIN-38" x="500" y="0"></use><use href="#MJMAIN-31" x="1001" y="0"></use></g><g transform="translate(4003,0)"><use href="#MJMAIN-48" x="250" y="0"></use><use href="#MJMAIN-7A" x="1000" y="0"></use></g></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>≈</mo><mn>51</mn><mo>,</mo><mn>281</mn><mtext>&nbsp;Hz</mtext></math></span></span><script type="math/tex" id="MathJax-Element-10">\approx51,281\text{ Hz}</script></td>
+</tr>
+</tbody>
+</table>
+<p>The PWM&nbsp;<strong>resolution</strong> <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-11-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.049ex" height="1.476ex" viewBox="0 -518.7 451.5 635.5" role="img" focusable="false" style="vertical-align: -0.271ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-72" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi></math></span></span><script type="math/tex" id="MathJax-Element-11">r</script> is defined to be the fraction <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-12-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mfrac&gt;&lt;msub&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mtext&gt;clock&lt;/mtext&gt;&lt;/msub&gt;&lt;msub&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mtext&gt;carrier&lt;/mtext&gt;&lt;/msub&gt;&lt;/mfrac&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="9.257ex" height="4.409ex" viewBox="0 -1207.6 3985.9 1898.4" role="img" focusable="false" style="vertical-align: -1.605ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-72" x="0" y="0"></use><use href="#MJMAIN-3D" x="729" y="0"></use><g transform="translate(1507,0)"><g transform="translate(397,0)"><rect stroke="none" width="1960" height="60" x="0" y="220"></rect><g transform="translate(222,594)"><use transform="scale(0.707)" href="#MJMATHI-66" x="0" y="0"></use><g transform="translate(346,-171)"><use transform="scale(0.5)" href="#MJMAIN-63"></use><use transform="scale(0.5)" href="#MJMAIN-6C" x="444" y="0"></use><use transform="scale(0.5)" href="#MJMAIN-6F" x="723" y="0"></use><use transform="scale(0.5)" href="#MJMAIN-63" x="1223" y="0"></use><use transform="scale(0.5)" href="#MJMAIN-6B" x="1668" y="0"></use></g></g><g transform="translate(60,-417)"><use transform="scale(0.707)" href="#MJMATHI-66" x="0" y="0"></use><g transform="translate(346,-171)"><use transform="scale(0.5)" href="#MJMAIN-63"></use><use transform="scale(0.5)" href="#MJMAIN-61" x="444" y="0"></use><use transform="scale(0.5)" href="#MJMAIN-72" x="945" y="0"></use><use transform="scale(0.5)" href="#MJMAIN-72" x="1337" y="0"></use><use transform="scale(0.5)" href="#MJMAIN-69" x="1730" y="0"></use><use transform="scale(0.5)" href="#MJMAIN-65" x="2008" y="0"></use><use transform="scale(0.5)" href="#MJMAIN-72" x="2453" y="0"></use></g></g></g></g></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>=</mo><mfrac><msub><mi>f</mi><mtext>clock</mtext></msub><msub><mi>f</mi><mtext>carrier</mtext></msub></mfrac></math></span></span><script type="math/tex" id="MathJax-Element-12">r=\frac{f_\text{clock}}{f_\text{carrier}}</script>. Intuitively, it can be understood as&nbsp;<em>the number of different brightness levels that LEDs can take when connected to the shift register<strong>.&nbsp;</strong></em>The resolution can be manually set on initialization of a shift register object (it is the second parameter of the constructor). Possible values are <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-13-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mo&gt;&amp;#x2208;&lt;/mo&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mn&gt;255&lt;/mn&gt;&lt;mo stretchy=&quot;false&quot;&gt;]&lt;/mo&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="11.125ex" height="2.809ex" viewBox="0 -863.1 4789.7 1209.6" role="img" focusable="false" style="vertical-align: -0.805ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-72" x="0" y="0"></use><use href="#MJMAIN-2208" x="729" y="0"></use><use href="#MJMAIN-28" x="1674" y="0"></use><use href="#MJMAIN-30" x="2064" y="0"></use><use href="#MJMAIN-2C" x="2564" y="0"></use><g transform="translate(3009,0)"><use href="#MJMAIN-32"></use><use href="#MJMAIN-35" x="500" y="0"></use><use href="#MJMAIN-35" x="1001" y="0"></use></g><use href="#MJMAIN-5D" x="4511" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>∈</mo><mo stretchy="false">(</mo><mn>0</mn><mo>,</mo><mn>255</mn><mo stretchy="false">]</mo></math></span></span><script type="math/tex" id="MathJax-Element-13">r\in(0,255]</script>. For the Arduino’s PWM pins it is fixed to <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-14-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;msub&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mtext&gt;Arduino&lt;/mtext&gt;&lt;/msub&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;256&lt;/mn&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="13.765ex" height="2.276ex" viewBox="0 -748.3 5926.6 979.9" role="img" focusable="false" style="vertical-align: -0.538ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-72" x="0" y="0"></use><g transform="translate(451,-163)"><use transform="scale(0.707)" href="#MJMAIN-41"></use><use transform="scale(0.707)" href="#MJMAIN-72" x="750" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-64" x="1143" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-75" x="1699" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-69" x="2256" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-6E" x="2534" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-6F" x="3091" y="0"></use></g><use href="#MJMAIN-3D" x="3368" y="0"></use><g transform="translate(4425,0)"><use href="#MJMAIN-32"></use><use href="#MJMAIN-35" x="500" y="0"></use><use href="#MJMAIN-36" x="1001" y="0"></use></g></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>r</mi><mtext>Arduino</mtext></msub><mo>=</mo><mn>256</mn></math></span></span><script type="math/tex" id="MathJax-Element-14">r_\text{Arduino}=256</script>.</p>
+<h2>Stacking Shift Registers</h2>
+<p>The library support serial operation of multiple shift registers. The 74HC595 can be chained as shown in the following circuit diagram (click to enlarge).</p>
+<p><a href="https://timodenk.com/blog/wp-content/uploads/2017/10/multiple-sr_schem_screenshot.png"><img class="aligncenter wp-image-1836" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/multiple-sr_schem_screenshot-e1509839113561.png" alt="" width="483" height="369" srcset="https://timodenk.com/blog/wp-content/uploads/2017/10/multiple-sr_schem_screenshot-e1509839113561.png 966w, https://timodenk.com/blog/wp-content/uploads/2017/10/multiple-sr_schem_screenshot-e1509839113561-300x229.png 300w, https://timodenk.com/blog/wp-content/uploads/2017/10/multiple-sr_schem_screenshot-e1509839113561-768x587.png 768w, https://timodenk.com/blog/wp-content/uploads/2017/10/multiple-sr_schem_screenshot-e1509839113561-668x510.png 668w" sizes="(max-width: 483px) 100vw, 483px"></a></p>
+<p>Now, the ShiftRegisterPWM constructor needs to be called with the corresponding number of shift registers. For the circuit diagram above that would be <code>srCount=2</code>.</p>
+<pre>ShiftRegisterPWM shiftRegisterPWM(srCount, resolution);</pre>
+<p>The time it takes to update the shift register output pins increases with the number of stacked shift registers. Therefore it is strongly recommended to decrease resolution <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-15-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.049ex" height="1.476ex" viewBox="0 -518.7 451.5 635.5" role="img" focusable="false" style="vertical-align: -0.271ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-72" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi></math></span></span><script type="math/tex" id="MathJax-Element-15">r</script> and&nbsp;<span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-16-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;msub&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mtext&gt;clock&lt;/mtext&gt;&lt;/msub&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="4.979ex" height="2.543ex" viewBox="0 -805.7 2143.7 1094.7" role="img" focusable="false" style="vertical-align: -0.671ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-66" x="0" y="0"></use><g transform="translate(490,-150)"><use transform="scale(0.707)" href="#MJMAIN-63"></use><use transform="scale(0.707)" href="#MJMAIN-6C" x="444" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-6F" x="723" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-63" x="1223" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-6B" x="1668" y="0"></use></g></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>f</mi><mtext>clock</mtext></msub></math></span></span><script type="math/tex" id="MathJax-Element-16">f_\text{clock}</script> with an increasing number of shift registers.</p>
+<h2>Custom Wiring</h2>
+<p>By default, the shift register must be connected to the Arduino UNO’s digital pins 2, 3, and 4.</p>
+<table>
+<tbody>
+<tr>
+<th>Arduino</th>
+<th>Shift register</th>
+<th>Role</th>
+</tr>
+<tr>
+<td>D2</td>
+<td>DS</td>
+<td>Serial data</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>SH_CP</td>
+<td>Serial data transmission clock</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>ST_CP</td>
+<td>Shift register output flip-flop clock</td>
+</tr>
+</tbody>
+</table>
+<p>While other libraries for different purposes offer to manually set the pins by passing them as parameters, the ShiftRegister PWM Library does not offer that for <a href="https://timodenk.com/blog/port-manipulation-and-arduino-digitalwrite-performance/">performance reasons</a>. Nevertheless, there is an option to change the pins. For each of the three wires, two macros can be defined which contain (1) the port and (2) a bit selection mask. The following table lists the macros with descriptions and the default value.</p>
+<table>
+<tbody>
+<tr>
+<th>Name</th>
+<th>Default</th>
+<th>Role</th>
+</tr>
+<tr>
+<td><code>ShiftRegisterPWM_DATA_PORT</code></td>
+<td><code>PORTD</code></td>
+<td>Register name of the bit that corresponds to the data pin</td>
+</tr>
+<tr>
+<td><code>ShiftRegisterPWM_DATA_MASK</code></td>
+<td><code>0B00000100</code></td>
+<td>Byte that masks the bit that corresponds to the data pin (2)</td>
+</tr>
+<tr>
+<td><code>ShiftRegisterPWM_CLOCK_PORT</code></td>
+<td><code>PORTD</code></td>
+<td>Register name of the bit that corresponds to the serial clock pin</td>
+</tr>
+<tr>
+<td><code>ShiftRegisterPWM_CLOCK_MASK</code></td>
+<td><code>0B00001000</code></td>
+<td>Byte that masks the bit that corresponds to the serial clock pin (3)</td>
+</tr>
+<tr>
+<td><code>ShiftRegisterPWM_LATCH_PORT</code></td>
+<td><code>PORTD</code></td>
+<td>Register name of the bit that corresponds to the latch clock pin</td>
+</tr>
+<tr>
+<td><code>ShiftRegisterPWM_LATCH_MASK</code></td>
+<td><code>0B00010000</code></td>
+<td>Byte that masks the bit that corresponds to the latch clock pin (4)</td>
+</tr>
+</tbody>
+</table>
+<p>The macros can be overwritten by making a definition prior to including the library. In the following snippet, the latch clock pin is set to be the digital pin 8 (instead of 4).</p>
+<pre>#define ShiftRegisterPWM_LATCH_PORT PORTB
+#define ShiftRegisterPWM_LATCH_MASK 1
+#include "ShiftRegisterPWM.h"</pre>
+<p>The associated example sketch is called&nbsp;<a href="https://github.com/Simsso/ShiftRegister-PWM-Library/blob/master/examples/CustomPins/CustomPins.ino" rel="noopener">CustomPins</a>. Details regarding the register names and bit masks can be found in the <a href="https://www.arduino.cc/en/Reference/PortManipulation" rel="noopener">Arduino port manipulation guide</a>.</p>
+<h2>Custom Timer</h2>
+<p>In order to update the digital pins of the shift register with the desired PWM frequency, the library uses timer interrupts. The library registers an interrupt if the function <code>sr.interrupt()</code> is called. Note that this works only for a single shift register object (or multiple in serial). If (1) multiple PWM shift registers shall be used in parallel, (2) an exact frequency is required, or if (3) the timer is not available for usage, e.g. because another library is already using it, it is possible to manually configure the library to use another timer. For calculating the compare-match-register values, I recommend using a&nbsp;<a href="https://tic.simsso.de/">timer interrupt calculator tool</a>. The example sketch&nbsp;<a href="https://github.com/Simsso/ShiftRegister-PWM-Library/blob/master/examples/CustomTimerInterrupt/CustomTimerInterrupt.ino">CustomTimerInterrupt</a>&nbsp;demonstrates manual timer operation mode.</p>
+<p>The library registers the timer 1 interrupt service routine (ISR) depending on a macro. In the source code, this is implemented as follows:</p>
+<pre>#ifndef ShiftRegisterPWM_CUSTOM_INTERRUPT
+  // Timer 1 interrupt service routine (ISR)
+  ISR(TIMER1_COMPA_vect) { // function which will be called when an interrupt occurs at timer 1
+    cli(); // disable interrupts (in case update method takes too long)
+    ShiftRegisterPWM::singleton-&gt;update();
+    sei(); // re-enable
+};
+#endif</pre>
+<p>Therefore, with writing&nbsp;<code>#define ShiftRegisterPWM_CUSTOM_INTERRUPT</code>&nbsp;prior to the library import, the <code>redefinition of 'void __vector_11()'</code>&nbsp;error can be prevented and timer 1 is spare.</p>
+              </div><!-- .entry-content -->
+
+              <footer class="entry-footer clearfix"><div class="meta-info"><span class="posted-on"><a href="https://timodenk.com/blog/shiftregister-pwm-library/" rel="bookmark"><time class="entry-date published" datetime="2017-11-05T12:00:07+02:00">November 5, 2017</time><time class="updated" datetime="2017-11-06T21:32:22+02:00">November 6, 2017</time></a></span><span class="byline">by <span class="author vcard"><a class="url fn n" href="https://timodenk.com/blog/author/timo-denk/">Timo Denk</a></span></span></div><div class="tags-links">Tagged: <a href="https://timodenk.com/blog/tag/74hc595/" rel="tag">74HC595</a>, <a href="https://timodenk.com/blog/tag/arduino/" rel="tag">Arduino</a>, <a href="https://timodenk.com/blog/tag/atmega328/" rel="tag">ATmega328</a>, <a href="https://timodenk.com/blog/tag/cpp/" rel="tag">C++</a>, <a href="https://timodenk.com/blog/tag/interrupt/" rel="tag">Interrupt</a>, <a href="https://timodenk.com/blog/tag/library/" rel="tag">Library</a>, <a href="https://timodenk.com/blog/tag/low-level/" rel="tag">Low-level</a>, <a href="https://timodenk.com/blog/tag/microcontroller/" rel="tag">Microcontroller</a>, <a href="https://timodenk.com/blog/tag/output/" rel="tag">Output</a>, <a href="https://timodenk.com/blog/tag/programming/" rel="tag">Programming</a>, <a href="https://timodenk.com/blog/tag/pwm/" rel="tag">PWM</a>, <a href="https://timodenk.com/blog/tag/shift-register/" rel="tag">Shift register</a>, <a href="https://timodenk.com/blog/tag/timer/" rel="tag">Timer</a></div></footer><!-- .entry-footer -->    <div class="about-author clearfix">
+      <div class="about-author-avatar">
+        <a href="https://timodenk.com/blog/author/timo-denk/">
+          <img alt="Timo Denk" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac.jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=120&amp;d=mm&amp;r=g 2x" class="avatar avatar-60 photo" height="60" width="60">        </a>
+      </div>
+      <div class="about-author-bio-wrap">
+        <div class="about-author-name">
+          <a href="https://timodenk.com/blog/author/timo-denk/" title="Posts by Timo Denk" rel="author">Timo Denk</a>          <span>(71 Posts)</span>
+        </div>
+        <div class="about-author-bio">
+          Zürich-based Software Engineer with Google and Founder of Denk Development. Opinions are my own. I am interested in data science, software engineering, 3d-printing, arts, music, microcontrollers, and sports.        </div>
+        <a href="https://timodenk.com/blog/author/timo-denk/" class="about-author-link">
+          View all author’s posts<i class="fa fa-caret-right"></i>
+        </a>
+      </div>
+    </div>
+                    </div>
+            </article><!-- #post-1272 -->
+                          
+            
+<div id="comments" class="comments-area">
+
+      <h2 class="comments-title">
+      49 Comments    </h2><!-- .comments-title -->
+
+    <ol class="comment-list">
+        <li id="comment-43" class="comment even thread-even depth-1 parent">
+    <div id="div-comment-43" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/0a15cb9cfef332110408041b1387d1d9.png" srcset="https://secure.gravatar.com/avatar/0a15cb9cfef332110408041b1387d1d9?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        weix            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=43#respond" data-commentid="43" data-postid="1272" data-belowelement="div-comment-43" data-respondelement="respond" aria-label="Reply to weix">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-02-15T10:43:59+02:00">February 15, 2018 at 10:43</time></span>
+                                </div>
+        <div class="comment-content"><p>Hello! i wanted to try this program on my esp 8266 but i always get a fatal error: avr/interrupt.h: No such file or directory.<br>
+where is the avr interrupt used and where in the code can I bypass that.. so that it will work on my controller?</p>
+<p>Thank you!</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-44" class="comment byuser comment-author-timo-denk bypostauthor odd alt depth-2">
+    <div id="div-comment-44" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=44#respond" data-commentid="44" data-postid="1272" data-belowelement="div-comment-44" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-02-15T16:47:23+02:00">February 15, 2018 at 16:47</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi there, It is possible to run it on an ESP8266, however, you have to make some modifications. The timers are different. Have a look at the “Custom Timer” section above and at <a href="https://github.com/Simsso/ShiftRegister-PWM-Library/blob/master/examples/CustomTimerInterrupt/CustomTimerInterrupt.ino" rel="nofollow ugc">this example sketch</a>.<br>
+If you have a working version for the ESP8266 feel free to share it here!</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-45" class="comment even thread-odd thread-alt depth-1 parent">
+    <div id="div-comment-45" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/0a15cb9cfef332110408041b1387d1d9.png" srcset="https://secure.gravatar.com/avatar/0a15cb9cfef332110408041b1387d1d9?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        weix            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=45#respond" data-commentid="45" data-postid="1272" data-belowelement="div-comment-45" data-respondelement="respond" aria-label="Reply to weix">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-02-17T18:24:43+02:00">February 17, 2018 at 18:24</time></span>
+                                </div>
+        <div class="comment-content"><p>that are good news! I think I understand the problem with the timer a little bit. It’s about synchronizing the ESP frequency with the interrupts. Unfortunately, I’m relatively new in programming and therefore it would be a pleasure if you could help me a little bit more (maybe with a code)? where do I have to start exactly to solve the problem.<br>
+Thx</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-46" class="comment odd alt depth-2">
+    <div id="div-comment-46" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/0a15cb9cfef332110408041b1387d1d9.png" srcset="https://secure.gravatar.com/avatar/0a15cb9cfef332110408041b1387d1d9?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        weix            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=46#respond" data-commentid="46" data-postid="1272" data-belowelement="div-comment-46" data-respondelement="respond" aria-label="Reply to weix">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-02-24T10:45:32+02:00">February 24, 2018 at 10:45</time></span>
+                                </div>
+        <div class="comment-content"><p>I’ve read a lot about timers and interrups of ESP modules and arduino boards. ESPs have hardware and software timers. I think for this program will probably be used a software timer. However, as a newbe of the arduino scene, I do not know how to rewrite this in this program code. Unfortunately, I find no suitable example programs on timers and interrupts for the ESP. I’m looking for a way to write an ISR code for ESP8266. So please can somebody help me!</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-47" class="comment even thread-even depth-1">
+    <div id="div-comment-47" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/0a15cb9cfef332110408041b1387d1d9.png" srcset="https://secure.gravatar.com/avatar/0a15cb9cfef332110408041b1387d1d9?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        weix            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=47#respond" data-commentid="47" data-postid="1272" data-belowelement="div-comment-47" data-respondelement="respond" aria-label="Reply to weix">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-03-02T12:28:58+02:00">March 2, 2018 at 12:28</time></span>
+                                </div>
+        <div class="comment-content"><p>I found a solution for my problem. At this time you can get up to 32 outputs from ESP8266 boards using shift registers and I2S with cryptoio. The library is still in progress but works realy well! You can also make Delta-Sigma PWM, exponentialy scalled for realistic LED light output.<br>
+<a href="https://github.com/Crypter/CryptoIO" rel="nofollow ugc">https://github.com/Crypter/CryptoIO</a></p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+  <li id="comment-48" class="comment odd alt thread-odd thread-alt depth-1">
+    <div id="div-comment-48" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/0a15cb9cfef332110408041b1387d1d9.png" srcset="https://secure.gravatar.com/avatar/0a15cb9cfef332110408041b1387d1d9?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        weix            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=48#respond" data-commentid="48" data-postid="1272" data-belowelement="div-comment-48" data-respondelement="respond" aria-label="Reply to weix">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-04-04T09:01:50+02:00">April 4, 2018 at 09:01</time></span>
+                                </div>
+        <div class="comment-content"><p>is it possible to make a serial connection (eg with a HM-10 or an Wlanmodul) i know there are some problems with the interrupt and timer. but is there any way to do this (eg to switch on/off or edit some variables) while the program is running?<br>
+i also tryed SoftwareSerials on other pins..which also didnt work realy well..<br>
+or is it only possible with an second controller or an different Arduino with multiple hardware serial ports?<br>
+Thanks!</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+  <li id="comment-49" class="comment even thread-even depth-1 parent">
+    <div id="div-comment-49" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/db3360b27b97f4fc737689d8feb90af9.png" srcset="https://secure.gravatar.com/avatar/db3360b27b97f4fc737689d8feb90af9?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Marcio Franco            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=49#respond" data-commentid="49" data-postid="1272" data-belowelement="div-comment-49" data-respondelement="respond" aria-label="Reply to Marcio Franco">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-04-04T14:35:35+02:00">April 4, 2018 at 14:35</time></span>
+                                </div>
+        <div class="comment-content"><p>Hello, i tried use the arduino Mega but not worked like your exemple, i followed all yours steps and add all your libraries, do you know saying if it work on the mega ?</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-50" class="comment byuser comment-author-timo-denk bypostauthor odd alt depth-2 parent">
+    <div id="div-comment-50" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=50#respond" data-commentid="50" data-postid="1272" data-belowelement="div-comment-50" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-04-04T17:14:19+02:00">April 4, 2018 at 17:14</time></span>
+                                </div>
+        <div class="comment-content"><p>I haven’t tried it yet but my first assumption is that the library is not working on the Mega because the I/O ports have different names. You have to make manual adjustments in order to make it work. The reason this stuff is so complicated is the performance advantage of direct port manipulation over digitalWrite.<br>
+This is the relevant part of the code: <a href="https://github.com/Simsso/ShiftRegister-PWM-Library/blob/master/src/ShiftRegisterPWM.h#L17-L41" rel="nofollow ugc">https://github.com/Simsso/ShiftRegister-PWM-Library/blob/master/src/ShiftRegisterPWM.h#L17-L41</a></p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-71" class="comment even depth-3 parent">
+    <div id="div-comment-71" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/4083dc83579c96d8d38cb441f36361c4.jpeg" srcset="https://secure.gravatar.com/avatar/4083dc83579c96d8d38cb441f36361c4?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Ignacio            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=71#respond" data-commentid="71" data-postid="1272" data-belowelement="div-comment-71" data-respondelement="respond" aria-label="Reply to Ignacio">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-09-03T13:34:16+02:00">September 3, 2018 at 13:34</time></span>
+                                </div>
+        <div class="comment-content"><p>Hello Timo,</p>
+<p>Do you know what the I/O port names for the MKR series (MKR1000 and MKR1010) are, or where I could find them? </p>
+<p>I have been searching for a couple of days unsuccessfully.</p>
+<p>Thanks,</p>
+<p>Ignacio</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-74" class="comment byuser comment-author-timo-denk bypostauthor odd alt depth-4 parent">
+    <div id="div-comment-74" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=74#respond" data-commentid="74" data-postid="1272" data-belowelement="div-comment-74" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-09-03T21:47:44+02:00">September 3, 2018 at 21:47</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Ignacio,<br>
+I wasn’t able to find it either. Maybe this datasheet is relevant <a href="http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-42618-SmartConnect-ATSAMW25-MR210PB_Datasheet.pdf" rel="nofollow ugc">http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-42618-SmartConnect-ATSAMW25-MR210PB_Datasheet.pdf</a><br>
+I found it by searching for the name of the microcontroller that is placed on top of the MKR1000 (<a href="https://store.arduino.cc/arduino-mkr1000" rel="nofollow ugc">https://store.arduino.cc/arduino-mkr1000</a>).<br>
+Alternatively, you might want to look into the boards\ directory and see which constants they define.<br>
+I hope that helps!</p>
+<p>Best,<br>
+Timo</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-75" class="comment even depth-5">
+    <div id="div-comment-75" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/4083dc83579c96d8d38cb441f36361c4.jpeg" srcset="https://secure.gravatar.com/avatar/4083dc83579c96d8d38cb441f36361c4?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Ignacio            <span class="reply"></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-09-03T22:06:54+02:00">September 3, 2018 at 22:06</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Timo,</p>
+<p>Yeah that was my initial thought also. I have been going through the libraries but I can’t find any of the digital ports being defined, which is off because the analog are. I tried guessing a few of the names but they don’t seem to be defined anywhere. Thanks for the link, I will keep digging and see if I can find the answer.</p>
+<p>Thanks again for the quick response.</p>
+<p>Alles Gute,</p>
+<p>Ignacio</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-60" class="comment odd alt thread-odd thread-alt depth-1 parent">
+    <div id="div-comment-60" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/4083dc83579c96d8d38cb441f36361c4.jpeg" srcset="https://secure.gravatar.com/avatar/4083dc83579c96d8d38cb441f36361c4?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Ignacio            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=60#respond" data-commentid="60" data-postid="1272" data-belowelement="div-comment-60" data-respondelement="respond" aria-label="Reply to Ignacio">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-07-15T05:59:03+02:00">July 15, 2018 at 05:59</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Timo,</p>
+<p>I am having an issue with the wiring of the 74HC595. As I understand from your document, Pin 0 should map to Q0 on the 74HC595, Pin 1 to Q1 and so on.</p>
+<p>It seems that the order of the pins are reversed. I am getting Pin 0 value on Q7 instead, Pin 1 on Q6 and so on.</p>
+<p>Any idea why this might be?</p>
+<p>Thanks</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-61" class="comment byuser comment-author-timo-denk bypostauthor even depth-2">
+    <div id="div-comment-61" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=61#respond" data-commentid="61" data-postid="1272" data-belowelement="div-comment-61" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-07-15T08:58:59+02:00">July 15, 2018 at 08:58</time></span>
+                                </div>
+        <div class="comment-content"><p>Hey there!<br>
+I think you are right, that’s just the way it is implemented right now (here: <a href="https://github.com/Simsso/ShiftRegister-PWM-Library/blob/master/src/ShiftRegisterPWM.h#L105" rel="nofollow ugc">https://github.com/Simsso/ShiftRegister-PWM-Library/blob/master/src/ShiftRegisterPWM.h#L105</a>). Since the numbering of the SR pins is kind of arbitrary you can just change the wiring and assume pin 8 was pin 1, 7 was 2, and so on.<br>
+Have a good one!</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-67" class="comment odd alt thread-even depth-1">
+    <div id="div-comment-67" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/db095cff8a5898e03fef85fce2978a58.png" srcset="https://secure.gravatar.com/avatar/db095cff8a5898e03fef85fce2978a58?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Gökhan            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=67#respond" data-commentid="67" data-postid="1272" data-belowelement="div-comment-67" data-respondelement="respond" aria-label="Reply to Gökhan">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-08-24T13:47:50+02:00">August 24, 2018 at 13:47</time></span>
+                                </div>
+        <div class="comment-content"><p>I made a connection to D1, D2, D9.is it OK? can I use it for PWM output ? I’il use it for DC motor ENA.</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+  <li id="comment-82" class="comment even thread-odd thread-alt depth-1 parent">
+    <div id="div-comment-82" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/a60db42008006432c9c0a4c98ba00bb2.png" srcset="https://secure.gravatar.com/avatar/a60db42008006432c9c0a4c98ba00bb2?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Marcus            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=82#respond" data-commentid="82" data-postid="1272" data-belowelement="div-comment-82" data-respondelement="respond" aria-label="Reply to Marcus">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-11-04T02:56:56+02:00">November 4, 2018 at 02:56</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi!<br>
+I was thinking about using this library dimming a relatively big number of LEDs. I’m also trying to make the whole package as small as possible for the sake of mobility. Would it be possible to convert this for an ATTiny or will memory constraints and/or clock frequencies be a problem? Is there other similar alternatives that might fit better for the task? I’m very new to all this so I’m sorry if the questions are dumb. 😛</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-83" class="comment byuser comment-author-timo-denk bypostauthor odd alt depth-2">
+    <div id="div-comment-83" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=83#respond" data-commentid="83" data-postid="1272" data-belowelement="div-comment-83" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-11-04T19:49:32+02:00">November 4, 2018 at 19:49</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Marcus,<br>
+if you want to control a large number of LEDs (say ~100) independently, this library won’t do the job. It’s not memory efficient enough and I am not even sure whether shift registers can be used in such a scenario. The clock frequency would need to be extremely high.<br>
+My recommendation is to buy digital to analog converters in such a case.</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-86" class="comment even thread-even depth-1">
+    <div id="div-comment-86" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/8f1c63cb9bbc614dedc27be380d2d2da.png" srcset="https://secure.gravatar.com/avatar/8f1c63cb9bbc614dedc27be380d2d2da?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Robson            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=86#respond" data-commentid="86" data-postid="1272" data-belowelement="div-comment-86" data-respondelement="respond" aria-label="Reply to Robson">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2018-12-07T23:54:47+02:00">December 7, 2018 at 23:54</time></span>
+                                </div>
+        <div class="comment-content"><p>Hello, I would suggest adding a sample code to use this library with servo motors, as it might be a good alternative for PCA9685. (Despite this PCA if I2C: <a href="https://www.adafruit.com/product/815" rel="nofollow ugc">https://www.adafruit.com/product/815</a> )</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+  <li id="comment-93" class="comment odd alt thread-odd thread-alt depth-1 parent">
+    <div id="div-comment-93" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/988e10252898c242ff9fb45c1cf4d9dd.png" srcset="https://secure.gravatar.com/avatar/988e10252898c242ff9fb45c1cf4d9dd?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Rolland            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=93#respond" data-commentid="93" data-postid="1272" data-belowelement="div-comment-93" data-respondelement="respond" aria-label="Reply to Rolland">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2019-02-07T08:08:57+02:00">February 7, 2019 at 08:08</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi,<br>
+So what if I initiate several instances of the object ShiftRegisterPWM; will I be able to send PMW signals to registers connected at different pins. I am trying to control an RGB matrix. I need the dimming effect since its sooooo much fun.</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-94" class="comment byuser comment-author-timo-denk bypostauthor even depth-2">
+    <div id="div-comment-94" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=94#respond" data-commentid="94" data-postid="1272" data-belowelement="div-comment-94" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2019-02-07T08:24:36+02:00">February 7, 2019 at 08:24</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Rolland, instantiating the ShiftRegisterPWM class several times does not make sense unless you call the update function (<a href="https://github.com/Simsso/ShiftRegister-PWM-Library/blob/master/src/ShiftRegisterPWM.h#L110" rel="nofollow ugc">https://github.com/Simsso/ShiftRegister-PWM-Library/blob/master/src/ShiftRegisterPWM.h#L110</a>) manually. Otherwise, the interrupt code won’t work.</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-97" class="comment odd alt thread-even depth-1 parent">
+    <div id="div-comment-97" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/18a49dd19542eb3f30ce8d237f2e55da.png" srcset="https://secure.gravatar.com/avatar/18a49dd19542eb3f30ce8d237f2e55da?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Felipe            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=97#respond" data-commentid="97" data-postid="1272" data-belowelement="div-comment-97" data-respondelement="respond" aria-label="Reply to Felipe">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2019-02-28T11:55:24+02:00">February 28, 2019 at 11:55</time></span>
+                                </div>
+        <div class="comment-content"><p>Hello, I am starting to play around with arduino but I cannot manage to get your library to work. I copied you example explicitly and i get an error in this line:<br>
+sr.interrupt(ShiftRegisterPWM::UpdateFrequency::SuperFast);<br>
+saying ” ‘sr’ does not name a type”.<br>
+Is this to do with the library or my IDE?<br>
+Thank you in advance</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-98" class="comment byuser comment-author-timo-denk bypostauthor even depth-2">
+    <div id="div-comment-98" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=98#respond" data-commentid="98" data-postid="1272" data-belowelement="div-comment-98" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2019-02-28T12:12:01+02:00">February 28, 2019 at 12:12</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Felipe, sounds as if you forgot to place this line of code at the top of your program: <code>ShiftRegisterPWM sr(1, 16);</code>. That’s where you declare the variable <code>sr</code>. Best regards!</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-113" class="comment odd alt thread-odd thread-alt depth-1">
+    <div id="div-comment-113" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/e13662d226480894fc0e2bd99e02fd22.png" srcset="https://secure.gravatar.com/avatar/e13662d226480894fc0e2bd99e02fd22?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Kamal            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=113#respond" data-commentid="113" data-postid="1272" data-belowelement="div-comment-113" data-respondelement="respond" aria-label="Reply to Kamal">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2019-05-23T15:48:35+02:00">May 23, 2019 at 15:48</time></span>
+                                </div>
+        <div class="comment-content"><p>I need real knight rider scanner code</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+  <li id="comment-117" class="comment even thread-even depth-1 parent">
+    <div id="div-comment-117" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/f94147446050b4952a2ff3b8e46c992e.png" srcset="https://secure.gravatar.com/avatar/f94147446050b4952a2ff3b8e46c992e?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Tales            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=117#respond" data-commentid="117" data-postid="1272" data-belowelement="div-comment-117" data-respondelement="respond" aria-label="Reply to Tales">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2019-07-26T16:50:56+02:00">July 26, 2019 at 16:50</time></span>
+                                </div>
+        <div class="comment-content"><p>Hello Timo!<br>
+I am using your library to control 6 pwm servo motors on a NODEMCU with esp8266. It works fine, but when I connect to wifi it causes an error and restarts NODEMCU. I believe the problem is in the timing control that causes conflict between interrupts used in the library and the hardware time required to switch the connection. Is there an example that connects to the internet and uses your library? regards</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-118" class="comment byuser comment-author-timo-denk bypostauthor odd alt depth-2">
+    <div id="div-comment-118" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=118#respond" data-commentid="118" data-postid="1272" data-belowelement="div-comment-118" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2019-07-27T15:51:37+02:00">July 27, 2019 at 15:51</time></span>
+                                </div>
+        <div class="comment-content"><p>I am not aware of any example that “connects to the internet and uses your library”. In your case a solution to the problem might be to use two microcontrollers: one that’s connected to the internet and one that controls the servos. The two would communicate through a simple wired connection.</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-140" class="comment even thread-odd thread-alt depth-1 parent">
+    <div id="div-comment-140" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/c34ebee7abea78478482e74d8f18c00f.png" srcset="https://secure.gravatar.com/avatar/c34ebee7abea78478482e74d8f18c00f?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Manuel            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=140#respond" data-commentid="140" data-postid="1272" data-belowelement="div-comment-140" data-respondelement="respond" aria-label="Reply to Manuel">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2019-12-20T11:35:38+02:00">December 20, 2019 at 11:35</time></span>
+                                </div>
+        <div class="comment-content"><p>Hello Timo,</p>
+<p>do you have a solution for my trouble with the library?<br>
+1) In function ‘void setup()’: HC595_PWM:30: error: ‘ShiftRegisterPWM::UpdateFrequency’ is not a class or namespace<br>
+2) ShiftRegisterPWM.h:199: error: ISO C++ forbids in-class initialization of non-const static member ‘time’</p>
+<p>Library is used with the included example code in Arduino IDE with MEGA2560.<br>
+I moved the initialization of “time” to the constructor so that problem is solved.<br>
+But the problem with the namespace I couldn’t solve yet – do you have an idea?</p>
+<p>Best<br>
+Manuel</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-142" class="comment byuser comment-author-timo-denk bypostauthor odd alt depth-2">
+    <div id="div-comment-142" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=142#respond" data-commentid="142" data-postid="1272" data-belowelement="div-comment-142" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2019-12-20T23:50:16+02:00">December 20, 2019 at 23:50</time></span>
+                                </div>
+        <div class="comment-content"><p>Hello Manuel,</p>
+<p>I am unfortunately unable to reproduce your error. I can successfully compile the example sketches “CustomPins” and “Potentiometer” with Arduino IDE version 1.8.10 on Mac OS for Arduino/Genuino Mega or Mega 2560 (board) with ATmega 2560 (processor). Can you tell me the exact configuration you are using when the error occurs?</p>
+<p>Thanks and best regards,<br>
+Timo</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-143" class="comment even thread-even depth-1">
+    <div id="div-comment-143" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/bf3f6ac314f0adbb51e2a3d83d9ea59f.png" srcset="https://secure.gravatar.com/avatar/bf3f6ac314f0adbb51e2a3d83d9ea59f?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Hariprasad            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=143#respond" data-commentid="143" data-postid="1272" data-belowelement="div-comment-143" data-respondelement="respond" aria-label="Reply to Hariprasad">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2019-12-26T04:44:03+02:00">December 26, 2019 at 04:44</time></span>
+                                </div>
+        <div class="comment-content"><p>Hello sir, I tried your library<br>
+It worked flawlessly first time but now<br>
+All the led’s are fading at the same time together. When I removed the latch connection the led’s started glowing in a sine manner.<br>
+So I tried the potentiometer example (latch removed). When I turn the knob halfway all the led’s are lit up to a minimal brightness, then Brightness is increasing<br>
+Along with the turn of the knob.<br>
+So I connected the latch, this time all the led’s are fading at the same time when I turn the knob</p>
+<p>Is there any way to fix this ??</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+  <li id="comment-150" class="comment odd alt thread-odd thread-alt depth-1 parent">
+    <div id="div-comment-150" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/50049a71edd7a79f929e2ac91fca3e30.png" srcset="https://secure.gravatar.com/avatar/50049a71edd7a79f929e2ac91fca3e30?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Gato            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=150#respond" data-commentid="150" data-postid="1272" data-belowelement="div-comment-150" data-respondelement="respond" aria-label="Reply to Gato">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2020-01-20T12:22:11+02:00">January 20, 2020 at 12:22</time></span>
+                                </div>
+        <div class="comment-content"><p>Have you thought of using the hardware SPI to do all the shifting business? You know, connecting the data line to MOSI, clock to SCK, and letting the wonderful internals of AVR micro to take care of it.</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-151" class="comment byuser comment-author-timo-denk bypostauthor even depth-2">
+    <div id="div-comment-151" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=151#respond" data-commentid="151" data-postid="1272" data-belowelement="div-comment-151" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2020-01-20T13:05:38+02:00">January 20, 2020 at 13:05</time></span>
+                                </div>
+        <div class="comment-content"><p>I haven’t, but it sounds very intriguing. Can you provide a link to someone doing that?</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-180" class="comment odd alt thread-even depth-1 parent">
+    <div id="div-comment-180" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/6309d856ad0e53cde7d03316cded8719.png" srcset="https://secure.gravatar.com/avatar/6309d856ad0e53cde7d03316cded8719?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Ben            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=180#respond" data-commentid="180" data-postid="1272" data-belowelement="div-comment-180" data-respondelement="respond" aria-label="Reply to Ben">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2020-03-30T20:01:50+02:00">March 30, 2020 at 20:01</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Timo,<br>
+Really great library! Works perfectly with 1 shiftreg, even with other pins.<br>
+Nevertheless can’t use a 2nd shiftreg. This second one is correctly wired (it duplicates the first shiftreg outputs with <code>ShiftRegisterPWM sr(1, 16)</code> setting.<br>
+But leds freeze when replacing this by <code>ShiftRegisterPWM sr(2, 16)</code> and <code>for (uint8_t i = 0; i &lt; 8; i++)</code> by <code>for (uint8_t i = 0; i &lt; 16; i++)</code> in your sine exemple. Can't succeed with various code modifications. What am I doing wrong?</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-182" class="comment byuser comment-author-timo-denk bypostauthor even depth-2">
+    <div id="div-comment-182" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=182#respond" data-commentid="182" data-postid="1272" data-belowelement="div-comment-182" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2020-04-05T15:07:02+02:00">April 5, 2020 at 15:07</time></span>
+                                </div>
+        <div class="comment-content"><p>Hey Ben, thanks for your comment and please pardon the late reply. Your sanity check with the duplication is very good, that makes perfect sense. My suspicion would be that the update frequency is too high for two registers, that is the Arduino is still busy shifting out when the next update cycle starts. I’d try to debug that by lowering the update frequency. Hope that helps!</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-216" class="comment odd alt thread-odd thread-alt depth-1 parent">
+    <div id="div-comment-216" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/a39e2a0187faf13437905ce386b86a44.png" srcset="https://secure.gravatar.com/avatar/a39e2a0187faf13437905ce386b86a44?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Simon Christen            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=216#respond" data-commentid="216" data-postid="1272" data-belowelement="div-comment-216" data-respondelement="respond" aria-label="Reply to Simon Christen">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2020-07-11T22:13:40+02:00">July 11, 2020 at 22:13</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Timo, Great library and it works perfectly so far.</p>
+<p>I’m using it to control 8 LEDS fading up and down  and I would like to add 5 more using the Arduino Nano’s PWM pins (5,6,9,10,11). However, Pin 9 and 10 don’t work as expected with the library running. I think it has something to do with your library using Timer 1 to control the interrups.</p>
+<p>Is there a way to use your library AND all 5 PWM pins (5,6,9,10,11) at the same time ?</p>
+<p>At the end of your article you discuss custom timers, but I’m afraid this is above my current skill level. A little help would be much appreciated. How can I use #define ShiftRegisterPWM_CUSTOM_INTERRUPT to make this work?</p>
+<p>Thanks and all the best,</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-217" class="comment byuser comment-author-timo-denk bypostauthor even depth-2">
+    <div id="div-comment-217" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=217#respond" data-commentid="217" data-postid="1272" data-belowelement="div-comment-217" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2020-07-12T13:38:58+02:00">July 12, 2020 at 13:38</time></span>
+                                </div>
+        <div class="comment-content"><p>Hey Simon, thanks for your nice comment! I am honestly a little bit surprised to hear that pins 9 and 10 do not work in PWM mode. The library should not be using these pins and interrupts are (as far as I know) generally not “disabling” or affecting the PWM functionality of these pins either. I’m afraid I cannot help here, also the <a href="https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/" rel="nofollow ugc">analogWrite</a> docs do not contain any information on interference with timer interrupts. If you happen to figure it out, please share your learnings here. 🙂</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+  <li id="comment-325" class="comment odd alt depth-2">
+    <div id="div-comment-325" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/692aef7d726d966a093fca8502f61417.png" srcset="https://secure.gravatar.com/avatar/692aef7d726d966a093fca8502f61417?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Carl            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=325#respond" data-commentid="325" data-postid="1272" data-belowelement="div-comment-325" data-respondelement="respond" aria-label="Reply to Carl">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2021-05-07T15:41:54+02:00">May 7, 2021 at 15:41</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Simon,<br>
+I have the same issue as you. if Pin 9 is attached the sketch will not run anymore, and pin 10 don’t work at all.<br>
+Have you found a solution?</p>
+<p>Best,<br>
+Carl</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-218" class="comment even thread-even depth-1">
+    <div id="div-comment-218" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/afef4b3f077743b0ae098730f92edea2.png" srcset="https://secure.gravatar.com/avatar/afef4b3f077743b0ae098730f92edea2?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Nathan            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=218#respond" data-commentid="218" data-postid="1272" data-belowelement="div-comment-218" data-respondelement="respond" aria-label="Reply to Nathan">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2020-08-10T20:33:35+02:00">August 10, 2020 at 20:33</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Timo,<br>
+I like the library because it allows me to control my LEDs. However I am running into a problem when I want to control the pins without PWM, the pwm control overwrites anything I try to write to the pins. Is there any way to turn off the pwm control?</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+  <li id="comment-222" class="comment odd alt thread-odd thread-alt depth-1">
+    <div id="div-comment-222" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/0298f8dc01064b40c168170b71d50c6a.png" srcset="https://secure.gravatar.com/avatar/0298f8dc01064b40c168170b71d50c6a?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        tiago            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=222#respond" data-commentid="222" data-postid="1272" data-belowelement="div-comment-222" data-respondelement="respond" aria-label="Reply to tiago">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2020-09-01T22:57:26+02:00">September 1, 2020 at 22:57</time></span>
+                                </div>
+        <div class="comment-content"><p>Hello. Does it work for esp32?</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+  <li id="comment-229" class="comment even thread-even depth-1">
+    <div id="div-comment-229" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/73a23260a03ef76686aebd21aea4acb8.png" srcset="https://secure.gravatar.com/avatar/73a23260a03ef76686aebd21aea4acb8?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Shankar            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=229#respond" data-commentid="229" data-postid="1272" data-belowelement="div-comment-229" data-respondelement="respond" aria-label="Reply to Shankar">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2020-09-30T13:24:40+02:00">September 30, 2020 at 13:24</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Timo, Could you help to advise, we should edit and load the program on to Attiny24 or Attiny45?</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+  <li id="comment-232" class="comment odd alt thread-odd thread-alt depth-1">
+    <div id="div-comment-232" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/e0e1dec291386e6572602b9f1e4e69d2.png" srcset="https://secure.gravatar.com/avatar/e0e1dec291386e6572602b9f1e4e69d2?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Eric            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=232#respond" data-commentid="232" data-postid="1272" data-belowelement="div-comment-232" data-respondelement="respond" aria-label="Reply to Eric">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2020-10-04T14:07:12+02:00">October 4, 2020 at 14:07</time></span>
+                                </div>
+        <div class="comment-content"><p>It complies fine when I select UNO, but gives several errors when I have Digispark (Default – 16.5mhz) selected.  Here is the complete message:   </p>
+<p>Arduino: 1.8.12 (Windows 10), Board: “Digispark (Default – 16.5mhz)”</p>
+<p>In file included from C:\Users\PowerUser\Documents\Arduino\libraries\ShiftRegister-PWM-Library\examples\sine\sine.ino:8:0:</p>
+<p>C:\Users\PowerUser\Documents\Arduino\libraries\ShiftRegister-PWM-Library\src/ShiftRegisterPWM.h: In member function ‘void ShiftRegisterPWM::update()’:</p>
+<p>C:\Users\PowerUser\Documents\Arduino\libraries\ShiftRegister-PWM-Library\src/ShiftRegisterPWM.h:37:39: error: ‘PORTD’ was not declared in this scope</p>
+<p>   #define ShiftRegisterPWM_LATCH_PORT PORTD</p>
+<p>                                       ^</p>
+<p>C:\Users\PowerUser\Documents\Arduino\libraries\ShiftRegister-PWM-Library\src/ShiftRegisterPWM.h:46:48: note: in expansion of macro ‘ShiftRegisterPWM_LATCH_PORT’</p>
+<p> #define ShiftRegisterPWM_toggleLatchPinTwice() ShiftRegisterPWM_LATCH_PORT ^= ShiftRegisterPWM_LATCH_MASK; ShiftRegisterPWM_LATCH_PORT ^= ShiftRegisterPWM_LATCH_MASK</p>
+<p>                                                ^</p>
+<p>C:\Users\PowerUser\Documents\Arduino\libraries\ShiftRegister-PWM-Library\src/ShiftRegisterPWM.h:126:5: note: in expansion of macro ‘ShiftRegisterPWM_toggleLatchPinTwice’</p>
+<p>     ShiftRegisterPWM_toggleLatchPinTwice();</p>
+<p>     ^</p>
+<p>In file included from C:\Users\PowerUser\Documents\Arduino\libraries\ShiftRegister-PWM-Library\examples\sine\sine.ino:8:0:</p>
+<p>C:\Users\PowerUser\Documents\Arduino\libraries\ShiftRegister-PWM-Library\src/ShiftRegisterPWM.h: In member function ‘void ShiftRegisterPWM::interrupt() const’:</p>
+<p>C:\Users\PowerUser\Documents\Arduino\libraries\ShiftRegister-PWM-Library\src/ShiftRegisterPWM.h:139:39: error: ‘ShiftRegisterPWM::UpdateFrequency’ is not a class or namespace</p>
+<p>     this-&gt;interrupt(ShiftRegisterPWM::UpdateFrequency::Medium);</p>
+<p>                                       ^</p>
+<p>C:\Users\PowerUser\Documents\Arduino\libraries\ShiftRegister-PWM-Library\src/ShiftRegisterPWM.h: In member function ‘void ShiftRegisterPWM::interrupt(ShiftRegisterPWM::UpdateFrequency) const’:</p>
+<p>C:\Users\PowerUser\Documents\Arduino\libraries\ShiftRegister-PWM-Library\src/ShiftRegisterPWM.h:155:5: error: ‘TCCR1A’ was not declared in this scope</p>
+<p>     TCCR1A = 0; // set TCCR1A register to 0</p>
+<p>     ^</p>
+<p>C:\Users\PowerUser\Documents\Arduino\libraries\ShiftRegister-PWM-Library\src/ShiftRegisterPWM.h:156:5: error: ‘TCCR1B’ was not declared in this scope</p>
+<p>     TCCR1B = 0; // set TCCR1B register to 0</p>
+<p>     ^</p>
+<p>C:\Users\PowerUser\Documents\Arduino\libraries\ShiftRegister-PWM-Library\src/ShiftRegisterPWM.h:187:21: error: ‘WGM12’ was not declared in this scope</p>
+<p>     TCCR1B |= (1 &lt;&lt; WGM12); // turn on CTC mode</p>
+<p>                     ^</p>
+<p>C:\Users\PowerUser\Documents\Arduino\libraries\ShiftRegister-PWM-Library\src/ShiftRegisterPWM.h:188:5: error: 'TIMSK1' was not declared in this scope</p>
+<p>     TIMSK1 |= (1 &lt; Preferences.</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+  <li id="comment-252" class="comment even thread-even depth-1">
+    <div id="div-comment-252" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/f807fa182d04890f28d6e39e17dbc39a.png" srcset="https://secure.gravatar.com/avatar/f807fa182d04890f28d6e39e17dbc39a?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Armando            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=252#respond" data-commentid="252" data-postid="1272" data-belowelement="div-comment-252" data-respondelement="respond" aria-label="Reply to Armando">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2020-12-07T00:41:24+02:00">December 7, 2020 at 00:41</time></span>
+                                </div>
+        <div class="comment-content"><p>It is not possible to include this library and compile with a platform that is not compatible with AVR, such as esp boards to my knowledge.</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+  <li id="comment-270" class="comment odd alt thread-odd thread-alt depth-1">
+    <div id="div-comment-270" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/96e73078a38a8f7b5ca6cf35ab4dc9f4.png" srcset="https://secure.gravatar.com/avatar/96e73078a38a8f7b5ca6cf35ab4dc9f4?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Umut            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=270#respond" data-commentid="270" data-postid="1272" data-belowelement="div-comment-270" data-respondelement="respond" aria-label="Reply to Umut">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2021-01-12T04:04:47+02:00">January 12, 2021 at 04:04</time></span>
+                                </div>
+        <div class="comment-content"><p>Hey I’m trying to use this library with AltSoftSerial library but I can’t compile. I’ve tried the custom timer example but still doesn’t work with AltSoftSerial. Any suggestions?</p>
+<p><a href="https://github.com/PaulStoffregen/AltSoftSerial" rel="nofollow ugc">https://github.com/PaulStoffregen/AltSoftSerial</a></p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+  <li id="comment-285" class="comment even thread-even depth-1 parent">
+    <div id="div-comment-285" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/16a5c4f2a4d2281aabe9c1a977fbdce8.png" srcset="https://secure.gravatar.com/avatar/16a5c4f2a4d2281aabe9c1a977fbdce8?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Roger            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=285#respond" data-commentid="285" data-postid="1272" data-belowelement="div-comment-285" data-respondelement="respond" aria-label="Reply to Roger">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2021-02-07T17:45:55+02:00">February 7, 2021 at 17:45</time></span>
+                                </div>
+        <div class="comment-content"><p>Hello.  I’m trying to use this library on a Mega 2560 with six shift registers using PWM pin 8 as data pin, PWM pin 9 as latch pin and PWM pin 10 as clock pin and I can’t get it to work.  I have set the following, but can’t get it to work:</p>
+<pre>#define ShiftRegisterPWM_DATA_PORT PORTB
+#define ShiftRegisterPWM_DATA_MASK 1
+#define ShiftRegisterPWM_LATCH_PORT PORTB
+#define ShiftRegisterPWM_LATCH_MASK 2
+#define ShiftRegisterPWM_CLOCK_PORT PORTB
+#define ShiftRegisterPWM_CLOCK_MASK 3
+#include "ShiftRegisterPWM.h"
+ShiftRegisterPWM sr(6, 16);
+</pre>
+<p>I think the mask settings may be incorrect but I can’t find anything on the precise settings.  Any help would be much appreciated.</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-286" class="comment byuser comment-author-timo-denk bypostauthor odd alt depth-2">
+    <div id="div-comment-286" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=286#respond" data-commentid="286" data-postid="1272" data-belowelement="div-comment-286" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2021-02-07T18:54:59+02:00">February 7, 2021 at 18:54</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Roger, I don’t know the Mega’s register names by heart, but I assume you double checked them. What I would try is getting it to work with a single shift register first. Six seem like a lot to me and there is a good chance that the ISR takes too long to terminate, so the microcontroller will end up doing nothing effectively. Please let me know whether you can get it to run for a single shift register. 🙂</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-287" class="comment even thread-odd thread-alt depth-1 parent">
+    <div id="div-comment-287" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/16a5c4f2a4d2281aabe9c1a977fbdce8.png" srcset="https://secure.gravatar.com/avatar/16a5c4f2a4d2281aabe9c1a977fbdce8?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Roger            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=287#respond" data-commentid="287" data-postid="1272" data-belowelement="div-comment-287" data-respondelement="respond" aria-label="Reply to Roger">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2021-02-07T20:05:46+02:00">February 7, 2021 at 20:05</time></span>
+                                </div>
+        <div class="comment-content"><p>Hello Timo and thanks for th ereply</p>
+<p>I tried with one register only, exactly as per your instructions, and that didn’t work either.  I think the problem is with the MASK entries.  I am not sure they are mapped correctly.  I’ve gone through 1,2,3 then 3,4,5 then 4,5,6 and so on using trial-and-error and it still doesn’t work, even with just one register.</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-288" class="comment byuser comment-author-timo-denk bypostauthor odd alt depth-2">
+    <div id="div-comment-288" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=288#respond" data-commentid="288" data-postid="1272" data-belowelement="div-comment-288" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2021-02-07T20:24:08+02:00">February 7, 2021 at 20:24</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Roger. I think you want the masks to be powers of two. Sorry, I overlooked that at first. Try going with <code>1</code>, <code>2</code>, and <code>4</code>, for example. You can also write them in binary, that makes it more apparent (but means exactly the same): <code>0B00000001</code>, <code>0B00000010</code>, and <code>0B00000100</code>.</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-289" class="comment even thread-even depth-1">
+    <div id="div-comment-289" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/16a5c4f2a4d2281aabe9c1a977fbdce8.png" srcset="https://secure.gravatar.com/avatar/16a5c4f2a4d2281aabe9c1a977fbdce8?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Roger            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=289#respond" data-commentid="289" data-postid="1272" data-belowelement="div-comment-289" data-respondelement="respond" aria-label="Reply to Roger">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2021-02-07T20:56:06+02:00">February 7, 2021 at 20:56</time></span>
+                                </div>
+        <div class="comment-content"><p>Thanks for that, Timo, but unfortunately it didn’t work.<br>
+I’ve tried shifting the bits too, so 0B00000001, 0B00000010, and 0B00000100 then 0B00000010, 0B00000100, and 0B00001000 then 0B00000100, 0B00001000, and 0B00010000 and so on, but it will still do nothing.</p>
+<p>I used your loop:-</p>
+<p>  for (uint8_t i = 0; i &lt; 8; i++) {<br>
+    uint8_t val = (uint8_t)(((float)<br>
+      sin(millis() / 150.0 + i / 8.0 * 2.0 * PI) + 1) * 128);<br>
+    sr.set(i, val);<br>
+  }</p>
+<p>to test it and nothing happens.</p>
+<p>when I do a normal:-</p>
+<p>  digitalWrite(9,LOW); shiftOut(8,10,MSBFIRST,B11111111); digitalWrite(9,HIGH);</p>
+<p>it lights the eight LEDs on the first shift register, so I know the connections are all working.</p>
+<p>This is a real head-scratcher!</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+  <li id="comment-318" class="comment odd alt thread-odd thread-alt depth-1 parent">
+    <div id="div-comment-318" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/597b293f5bc4dd9c2bb85fbb4a443259.png" srcset="https://secure.gravatar.com/avatar/597b293f5bc4dd9c2bb85fbb4a443259?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Daniel            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=318#respond" data-commentid="318" data-postid="1272" data-belowelement="div-comment-318" data-respondelement="respond" aria-label="Reply to Daniel">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2021-04-10T20:08:38+02:00">April 10, 2021 at 20:08</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Timo,</p>
+<p>I framed a picture and put 20 LEDs on it. To control them I used three shift registers and transistor arrays. For testing I used your sine code and it works as intended. I’m new to programming so my question is, how can I easily change the speed and the brightness? (so that the values never go to negative and the LEDs always glow a bit) Hope you can help.</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-319" class="comment byuser comment-author-timo-denk bypostauthor even depth-2 parent">
+    <div id="div-comment-319" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/1ac0ed24b1a0f4d9d9b290a410847bac(1).jpeg" srcset="https://secure.gravatar.com/avatar/1ac0ed24b1a0f4d9d9b290a410847bac?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        <a href="https://timodenk.com/" rel="external nofollow ugc" class="url">Timo Denk</a>            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=319#respond" data-commentid="319" data-postid="1272" data-belowelement="div-comment-319" data-respondelement="respond" aria-label="Reply to Timo Denk">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2021-04-10T22:45:27+02:00">April 10, 2021 at 22:45</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Daniel! In <a href="https://github.com/Simsso/ShiftRegister-PWM-Library/blob/a1774a8f753940f0b146e003c20c5f02b777e44e/examples/sine/sine.ino" rel="nofollow ugc">the sine example</a> the relevant line is number 24:</p>
+<pre> uint8_t val = (uint8_t)(((float)sin(millis() / 150.0 + i / 8.0 * 2.0 * PI) + 1) * 128);
+</pre>
+<p>The value <code>150.0</code> controls the speed. In order to change the minimum brightness you can change the code to the following and control the minimum with <code>minBrightness</code>:</p>
+<pre>float minBrightness = 0.1; // a value in [0, 1)
+uint8_t val = (uint8_t)((((float)sin(millis() / 150.0 + i / 8.0 * 2.0 * PI) / 2 + .5) * (1 - minBrightness) + minBrightness) * 256);
+</pre>
+<p>I haven’t tested that though… I hope it works. 🙂</p>
+</div>
+      </div>
+    </div>
+<ul class="children">
+  <li id="comment-321" class="comment odd alt depth-3">
+    <div id="div-comment-321" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/597b293f5bc4dd9c2bb85fbb4a443259.png" srcset="https://secure.gravatar.com/avatar/597b293f5bc4dd9c2bb85fbb4a443259?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Daniel            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=321#respond" data-commentid="321" data-postid="1272" data-belowelement="div-comment-321" data-respondelement="respond" aria-label="Reply to Daniel">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2021-04-13T17:50:57+02:00">April 13, 2021 at 17:50</time></span>
+                                </div>
+        <div class="comment-content"><p>Thank you for the quick help! It works perfectly, just one more question. How can I add maximum brightness with a float value as well? 🙂</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+  <li id="comment-324" class="comment even thread-even depth-1">
+    <div id="div-comment-324" class="comment-body clearfix">
+      <div class="comment-author clearfix">
+        <div class="comment-avatar"><img alt="" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/6d99f16d753036cf6ee8de1e9df155cf.png" srcset="https://secure.gravatar.com/avatar/6d99f16d753036cf6ee8de1e9df155cf?s=80&amp;d=mm&amp;r=g 2x" class="avatar avatar-40 photo" height="40" width="40"></div>
+      </div>
+            
+      <div class="comment-info clearfix">  
+        <div class="fn">
+        Bram            <span class="reply"><a rel="nofollow" class="comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/?replytocom=324#respond" data-commentid="324" data-postid="1272" data-belowelement="div-comment-324" data-respondelement="respond" aria-label="Reply to Bram">Reply</a></span>
+        </div>  
+        
+        <div class="comment-meta">            
+            <span class="comment-metadata"><time datetime="2021-05-06T14:13:44+02:00">May 6, 2021 at 14:13</time></span>
+                                </div>
+        <div class="comment-content"><p>Hi Timo,</p>
+<p>What is maximum output frequency on 11 daisy-chained 74hc595’s?<br>
+I need at least 20 kHz on 88 output pins.</p>
+</div>
+      </div>
+    </div>
+</li><!-- #comment-## -->
+    </ol><!-- .comment-list -->
+
+    	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://timodenk.com/blog/shiftregister-pwm-library/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://timodenk.com/blog/wp-comments-post.php" method="post" id="commentform" class="comment-form anti-spam-form-processed" novalidate=""><div class="form_item"><textarea id="comment" name="comment" placeholder="Your comment *"></textarea></div><div class="form_item"><input id="author" type="text" aria-required="true" size="22" value="" name="author" placeholder="Your Name *"></div>
+<div class="form_item"><input id="email" type="text" aria-required="true" size="22" value="" name="email" placeholder="Your Email *"></div>
+<div class="form_item"><input id="url" type="text" aria-required="true" size="22" value="" name="url" placeholder="Your Website"></div>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="1272" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p>
+<!-- Anti-spam plugin v.5.5 wordpress.org/plugins/anti-spam/ -->
+		<p class="antispam-group antispam-group-q" style="clear: both; display: none;">
+			<label>Current ye@r <span class="required">*</span></label>
+			<input type="hidden" name="antspm-a" class="antispam-control antispam-control-a" value="2021">
+			<input type="text" name="antspm-q" class="antispam-control antispam-control-q" value="5.5" autocomplete="off">
+		</p>
+		<p class="antispam-group antispam-group-e" style="display: none;">
+			<label>Leave this field empty</label>
+			<input type="text" name="antspm-e-email-url-website" class="antispam-control antispam-control-e" value="" autocomplete="off">
+		</p>
+<input type="hidden" name="antspm-d" class="antispam-control antispam-control-d" value="2021"></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+
+            </main><!-- #main -->
+          </div><!-- #primary -->
+
+        </div>
+        <div class="col-md-4 sidebar-right">
+          <aside id="secondary" class="widget-area">
+	<section id="search-2" class="widget widget_search"><h2 class="widget-title"><span>Find posts</span></h2>
+
+<form role="search" method="get" class="search-form" action="https://timodenk.com/blog/">
+  <div class="input-group">
+    <input type="search" id="search-form-60e176a71e9cc" class="search-field form-control" placeholder="Search …" value="" name="s">
+    <span class="input-group-btn">
+      <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+    </span>
+  </div>
+</form>
+</section><section id="text-6" class="widget widget_text"><h2 class="widget-title"><span>About</span></h2>			<div class="textwidget"><p>Hi there! This blog is run by me, Timo. I am a Software Engineer living in Zürich, Switzerland. Please visit <a href="https://timodenk.com/">my portfolio website</a>&nbsp;for more detailed information.</p>
+</div>
+		</section><section id="text-12" class="widget widget_text"><h2 class="widget-title"><span>Editor’s choice</span></h2>			<div class="textwidget"><p>If you just came here and do not know where to go, I recommend looking into these posts:</p>
+<ul>
+<li><a href="https://timodenk.com/blog/digit-span-test-online-tool/">Digit Span Test</a> <em>(most viewed)</em></li>
+<li><a href="https://timodenk.com/blog/cubic-spline-interpolation/">Cubic Spline Interpolation</a>&nbsp;<em>(math-heavy)</em></li>
+<li><a href="https://timodenk.com/blog/commute-time-tracking/">Commute Time Tracking</a>&nbsp;<em>(nice read)</em></li>
+<li><a href="https://timodenk.com/blog/linear-relationships-in-the-transformers-positional-encoding/">Linear Relationships in the Transformer’s Positional Encoding</a>&nbsp;<em>(machine learning)</em></li>
+<li><a href="https://timodenk.com/blog/corsairs3d/">Corsairs3D</a>&nbsp;<em>(pirate game – arrr!)</em></li>
+</ul>
+</div>
+		</section><section id="text-10" class="widget widget_text"><h2 class="widget-title"><span>Archive</span></h2>			<div class="textwidget"><p>The <a href="https://timodenk.com/blog/archive/">archive page</a>&nbsp;of this blog lists all posts in chronological order.</p>
+</div>
+		</section><section id="email-subscribers-form-4" class="widget widget_email-subscribers-form"><h2 class="widget-title"><span>Email Newsletter</span></h2>
+        <div class="emaillist">
+            <form action="https://timodenk.com/blog/shiftregister-pwm-library/#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1625388711" data-source="ig-es">
+				                    <div class="es_caption">There is an email newsletter available. Once signed up, you will receive an email every time a new post is published. That is usually about once or twice a month.</div>
+												<div class="es-field-wrap"><label><input class="es_required_field es_txt_email" type="email" name="email" value="" placeholder="" required=""></label></div>				<input type="hidden" name="lists[]" value="1">				<input type="hidden" name="form_id" value="0">
+                <input type="hidden" name="es_email_page" value="1272">
+                <input type="hidden" name="es_email_page_url" value="https://timodenk.com/blog/shiftregister-pwm-library/">
+                <input type="hidden" name="status" value="Unconfirmed">
+                <input type="hidden" name="es-subscribe" id="es-subscribe" value="2bb53201ba">
+                <label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value=""></label>
+								                <input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1625388711" value="Subscribe">
+
+				                
+                <span class="es_spinner_image" id="spinner-image"><img src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/spinner.gif"></span>
+
+            </form>
+
+            <span class="es_subscription_message" id="es_subscription_message_1625388711"></span>
+        </div>
+
+		</section><section id="tag_cloud-2" class="widget widget_tag_cloud"><h2 class="widget-title"><span>Tags</span></h2><div class="tagcloud"><a href="https://timodenk.com/blog/tag/3d/" class="tag-cloud-link tag-link-56 tag-link-position-1" style="font-size: 13.285714285714pt;" aria-label="3D (6 items)">3D</a>
+<a href="https://timodenk.com/blog/tag/3d-printing/" class="tag-cloud-link tag-link-306 tag-link-position-2" style="font-size: 11.142857142857pt;" aria-label="3D printing (4 items)">3D printing</a>
+<a href="https://timodenk.com/blog/tag/arduino/" class="tag-cloud-link tag-link-28 tag-link-position-3" style="font-size: 14.714285714286pt;" aria-label="Arduino (8 items)">Arduino</a>
+<a href="https://timodenk.com/blog/tag/art/" class="tag-cloud-link tag-link-310 tag-link-position-4" style="font-size: 9.7142857142857pt;" aria-label="Art (3 items)">Art</a>
+<a href="https://timodenk.com/blog/tag/blender/" class="tag-cloud-link tag-link-203 tag-link-position-5" style="font-size: 12.285714285714pt;" aria-label="Blender (5 items)">Blender</a>
+<a href="https://timodenk.com/blog/tag/book/" class="tag-cloud-link tag-link-222 tag-link-position-6" style="font-size: 9.7142857142857pt;" aria-label="Book (3 items)">Book</a>
+<a href="https://timodenk.com/blog/tag/c/" class="tag-cloud-link tag-link-27 tag-link-position-7" style="font-size: 8pt;" aria-label="C (2 items)">C</a>
+<a href="https://timodenk.com/blog/tag/c-sharp/" class="tag-cloud-link tag-link-25 tag-link-position-8" style="font-size: 8pt;" aria-label="C# (2 items)">C#</a>
+<a href="https://timodenk.com/blog/tag/cpp/" class="tag-cloud-link tag-link-26 tag-link-position-9" style="font-size: 12.285714285714pt;" aria-label="C++ (5 items)">C++</a>
+<a href="https://timodenk.com/blog/tag/computer-science/" class="tag-cloud-link tag-link-114 tag-link-position-10" style="font-size: 11.142857142857pt;" aria-label="Computer Science (4 items)">Computer Science</a>
+<a href="https://timodenk.com/blog/tag/conference/" class="tag-cloud-link tag-link-273 tag-link-position-11" style="font-size: 8pt;" aria-label="Conference (2 items)">Conference</a>
+<a href="https://timodenk.com/blog/tag/convolutional-network/" class="tag-cloud-link tag-link-167 tag-link-position-12" style="font-size: 9.7142857142857pt;" aria-label="Convolutional network (3 items)">Convolutional network</a>
+<a href="https://timodenk.com/blog/tag/deep-learning/" class="tag-cloud-link tag-link-226 tag-link-position-13" style="font-size: 12.285714285714pt;" aria-label="Deep learning (5 items)">Deep learning</a>
+<a href="https://timodenk.com/blog/tag/denkdevelopment/" class="tag-cloud-link tag-link-286 tag-link-position-14" style="font-size: 9.7142857142857pt;" aria-label="DenkDevelopment (3 items)">DenkDevelopment</a>
+<a href="https://timodenk.com/blog/tag/ender-3-pro/" class="tag-cloud-link tag-link-307 tag-link-position-15" style="font-size: 11.142857142857pt;" aria-label="Ender 3 Pro (4 items)">Ender 3 Pro</a>
+<a href="https://timodenk.com/blog/tag/functional-programming/" class="tag-cloud-link tag-link-184 tag-link-position-16" style="font-size: 9.7142857142857pt;" aria-label="Functional programming (3 items)">Functional programming</a>
+<a href="https://timodenk.com/blog/tag/graph/" class="tag-cloud-link tag-link-145 tag-link-position-17" style="font-size: 11.142857142857pt;" aria-label="Graph (4 items)">Graph</a>
+<a href="https://timodenk.com/blog/tag/hardware/" class="tag-cloud-link tag-link-73 tag-link-position-18" style="font-size: 12.285714285714pt;" aria-label="Hardware (5 items)">Hardware</a>
+<a href="https://timodenk.com/blog/tag/haskell/" class="tag-cloud-link tag-link-183 tag-link-position-19" style="font-size: 9.7142857142857pt;" aria-label="Haskell (3 items)">Haskell</a>
+<a href="https://timodenk.com/blog/tag/historic/" class="tag-cloud-link tag-link-135 tag-link-position-20" style="font-size: 9.7142857142857pt;" aria-label="Historic (3 items)">Historic</a>
+<a href="https://timodenk.com/blog/tag/history/" class="tag-cloud-link tag-link-271 tag-link-position-21" style="font-size: 8pt;" aria-label="History (2 items)">History</a>
+<a href="https://timodenk.com/blog/tag/javascript/" class="tag-cloud-link tag-link-39 tag-link-position-22" style="font-size: 12.285714285714pt;" aria-label="JavaScript (5 items)">JavaScript</a>
+<a href="https://timodenk.com/blog/tag/library/" class="tag-cloud-link tag-link-124 tag-link-position-23" style="font-size: 9.7142857142857pt;" aria-label="Library (3 items)">Library</a>
+<a href="https://timodenk.com/blog/tag/low-level/" class="tag-cloud-link tag-link-35 tag-link-position-24" style="font-size: 12.285714285714pt;" aria-label="Low-level (5 items)">Low-level</a>
+<a href="https://timodenk.com/blog/tag/machine-learning/" class="tag-cloud-link tag-link-161 tag-link-position-25" style="font-size: 15.428571428571pt;" aria-label="Machine learning (9 items)">Machine learning</a>
+<a href="https://timodenk.com/blog/tag/math/" class="tag-cloud-link tag-link-30 tag-link-position-26" style="font-size: 18pt;" aria-label="Math (14 items)">Math</a>
+<a href="https://timodenk.com/blog/tag/microcontroller/" class="tag-cloud-link tag-link-29 tag-link-position-27" style="font-size: 14.714285714286pt;" aria-label="Microcontroller (8 items)">Microcontroller</a>
+<a href="https://timodenk.com/blog/tag/miniature/" class="tag-cloud-link tag-link-312 tag-link-position-28" style="font-size: 11.142857142857pt;" aria-label="Miniature (4 items)">Miniature</a>
+<a href="https://timodenk.com/blog/tag/modeling/" class="tag-cloud-link tag-link-315 tag-link-position-29" style="font-size: 9.7142857142857pt;" aria-label="Modeling (3 items)">Modeling</a>
+<a href="https://timodenk.com/blog/tag/music/" class="tag-cloud-link tag-link-214 tag-link-position-30" style="font-size: 9.7142857142857pt;" aria-label="Music (3 items)">Music</a>
+<a href="https://timodenk.com/blog/tag/neural-network/" class="tag-cloud-link tag-link-162 tag-link-position-31" style="font-size: 12.285714285714pt;" aria-label="Neural network (5 items)">Neural network</a>
+<a href="https://timodenk.com/blog/tag/node-js/" class="tag-cloud-link tag-link-66 tag-link-position-32" style="font-size: 14.714285714286pt;" aria-label="Node.js (8 items)">Node.js</a>
+<a href="https://timodenk.com/blog/tag/paper/" class="tag-cloud-link tag-link-163 tag-link-position-33" style="font-size: 11.142857142857pt;" aria-label="Paper (4 items)">Paper</a>
+<a href="https://timodenk.com/blog/tag/piano/" class="tag-cloud-link tag-link-213 tag-link-position-34" style="font-size: 11.142857142857pt;" aria-label="Piano (4 items)">Piano</a>
+<a href="https://timodenk.com/blog/tag/poker/" class="tag-cloud-link tag-link-47 tag-link-position-35" style="font-size: 11.142857142857pt;" aria-label="Poker (4 items)">Poker</a>
+<a href="https://timodenk.com/blog/tag/programming/" class="tag-cloud-link tag-link-24 tag-link-position-36" style="font-size: 22pt;" aria-label="Programming (28 items)">Programming</a>
+<a href="https://timodenk.com/blog/tag/python/" class="tag-cloud-link tag-link-264 tag-link-position-37" style="font-size: 8pt;" aria-label="Python (2 items)">Python</a>
+<a href="https://timodenk.com/blog/tag/raspberry-pi/" class="tag-cloud-link tag-link-64 tag-link-position-38" style="font-size: 11.142857142857pt;" aria-label="Raspberry Pi (4 items)">Raspberry Pi</a>
+<a href="https://timodenk.com/blog/tag/sap/" class="tag-cloud-link tag-link-38 tag-link-position-39" style="font-size: 9.7142857142857pt;" aria-label="SAP (3 items)">SAP</a>
+<a href="https://timodenk.com/blog/tag/science/" class="tag-cloud-link tag-link-89 tag-link-position-40" style="font-size: 15.428571428571pt;" aria-label="Science (9 items)">Science</a>
+<a href="https://timodenk.com/blog/tag/space/" class="tag-cloud-link tag-link-77 tag-link-position-41" style="font-size: 9.7142857142857pt;" aria-label="Space (3 items)">Space</a>
+<a href="https://timodenk.com/blog/tag/telegram/" class="tag-cloud-link tag-link-62 tag-link-position-42" style="font-size: 9.7142857142857pt;" aria-label="Telegram (3 items)">Telegram</a>
+<a href="https://timodenk.com/blog/tag/telegram-bot/" class="tag-cloud-link tag-link-63 tag-link-position-43" style="font-size: 9.7142857142857pt;" aria-label="Telegram bot (3 items)">Telegram bot</a>
+<a href="https://timodenk.com/blog/tag/test/" class="tag-cloud-link tag-link-171 tag-link-position-44" style="font-size: 9.7142857142857pt;" aria-label="Test (3 items)">Test</a>
+<a href="https://timodenk.com/blog/tag/tools/" class="tag-cloud-link tag-link-45 tag-link-position-45" style="font-size: 12.285714285714pt;" aria-label="Tools (5 items)">Tools</a></div>
+</section><section id="custom_html-2" class="widget_text widget widget_custom_html"><h2 class="widget-title"><span>Donate</span></h2><div class="textwidget custom-html-widget"><p>
+	I have decided to remove all ads from this page, because I just don't find it to be a <em>nice</em> way of making a few bucks a month.
+</p>
+<p>
+	If you enjoyed the content of my site, please consider donating a small amount of money through the link below.
+</p>
+<p>
+	Suggested values are <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-17-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;msqrt&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msqrt&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.098ex" height="2.809ex" viewBox="0 -977.9 1334 1209.6" role="img" focusable="false" style="vertical-align: -0.538ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-221A" x="0" y="49"></use><rect stroke="none" width="500" height="60" x="833" y="790"></rect><use href="#MJMAIN-32" x="833" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msqrt><mn>2</mn></msqrt></math></span></span><script type="math/tex" id="MathJax-Element-17">\sqrt{2}</script>, <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-18-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;&amp;#x03C0;&lt;/mi&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.332ex" height="1.476ex" viewBox="0 -518.7 573.5 635.5" role="img" focusable="false" style="vertical-align: -0.271ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMATHI-3C0" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>π</mi></math></span></span><script type="math/tex" id="MathJax-Element-18">\pi</script>, or the electron mass (without the <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-19-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mo&gt;&amp;#x00D7;&lt;/mo&gt;&lt;msup&gt;&lt;mn&gt;10&lt;/mn&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;31&lt;/mn&gt;&lt;/mrow&gt;&lt;/msup&gt;&lt;mtext&gt;kg&lt;/mtext&gt;&lt;/math&gt;" role="presentation" style="font-size: 100%; display: inline-block; position: relative;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="9.678ex" height="2.943ex" viewBox="0 -977.9 4166.8 1267" role="img" focusable="false" style="vertical-align: -0.671ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-D7" x="0" y="0"></use><g transform="translate(778,0)"><use href="#MJMAIN-31"></use><use href="#MJMAIN-30" x="500" y="0"></use><g transform="translate(1001,393)"><use transform="scale(0.707)" href="#MJMAIN-2212" x="0" y="0"></use><g transform="translate(550,0)"><use transform="scale(0.707)" href="#MJMAIN-33"></use><use transform="scale(0.707)" href="#MJMAIN-31" x="500" y="0"></use></g></g></g><g transform="translate(3137,0)"><use href="#MJMAIN-6B"></use><use href="#MJMAIN-67" x="528" y="0"></use></g></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>×</mo><msup><mn>10</mn><mrow class="MJX-TeXAtom-ORD"><mo>−</mo><mn>31</mn></mrow></msup><mtext>kg</mtext></math></span></span><script type="math/tex" id="MathJax-Element-19">\times10^{-31}\text{kg}</script>), but you can also choose an arbitrary amount.
+</p>
+
+<center>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="DGGUMQW6Z4HE2">
+<input type="image" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button">
+<img alt="" border="0" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/pixel.gif" width="1" height="1">
+</form>
+</center></div></section><section id="text-8" class="widget widget_text"><h2 class="widget-title"><span>Navigation</span></h2>			<div class="textwidget"><div style="text-align: center;"><a href="https://timodenk.com/blog">Home</a>&nbsp;·&nbsp;<a href="https://timodenk.com/blog/contact/" rel="noopener">Contact</a>&nbsp;·&nbsp;<a href="https://timodenk.com/imprint/" target="_blank" rel="noopener noreferrer">Legal</a></div>
+</div>
+		</section></aside><!-- #secondary -->
+        </div>
+      </div>
+
+  </div>
+</div><!-- #content -->
+
+
+  <footer id="colophon" class="site-footer">
+    <div class="container">
+      <div class="site-info clearfix">
+        
+        <div class="site-info-copyright ">
+          <a href="https://wordpress.org/">Proudly powered by WordPress</a>
+          <span class="sep"> | </span>
+          Theme: Sin by <a href="http://vsfish.com/">vsFish</a>.        </div>
+      </div><!-- .site-info -->
+    </div>
+  </footer><!-- #colophon -->
+
+  <div id="back_top" class="visible-button"><i class="fa fa-angle-up"></i></div>
+  
+</div><!-- #page -->
+
+<script type="text/javascript" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/anti-spam-5.5.js.ดาวน์โหลด"></script>
+<script type="text/javascript" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/MathJax.js.ดาวน์โหลด"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var ctcc_vars = {"expiry":"365","method":"","version":"2"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/uk-cookie-consent-js.js.ดาวน์โหลด"></script>
+<script type="text/javascript" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/bootstrap.min.js.ดาวน์โหลด"></script>
+<script type="text/javascript" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/ie10-viewport-bug-workaround.js.ดาวน์โหลด"></script>
+<script type="text/javascript" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/theme.js.ดาวน์โหลด"></script>
+<script type="text/javascript" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/comment-reply.min.js.ดาวน์โหลด"></script>
+<script type="text/javascript" src="./ShiftRegister PWM Library – Timo Denk&#39;s Blog_files/wp-embed.min.js.ดาวน์โหลด"></script>
+			
+				<script type="text/javascript">
+					jQuery(document).ready(function($){
+												if(!catapultReadCookie("catAccCookies")){ // If the cookie has not been set then show the bar
+							$("html").addClass("has-cookie-bar");
+							$("html").addClass("cookie-bar-bottom-right-block");
+							$("html").addClass("cookie-bar-block");
+													}
+																	});
+				</script>
+			
+			<div id="catapult-cookie-bar" class=" rounded-corners drop-shadow"><h3>Cookies</h3><span class="ctcc-left-side">This site uses cookies. <a class="ctcc-more-info-link" tabindex="0" target="_blank" href="https://timodenk.com/blog/cookie-policy/">More</a></span><span class="ctcc-right-side"><button id="catapultCookie" tabindex="0" onclick="catapultAcceptCookies();">Okay</button></span></div><!-- #catapult-cookie-bar -->
+
+</body></html>
